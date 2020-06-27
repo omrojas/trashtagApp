@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
-import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
-import 'package:trashtagApp/src/pages/login/login_form.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
-class LoginPage extends StatelessWidget {
-  final UserRepository userRepository;
+import 'independent_volunteer_form.dart';
 
-  LoginPage({Key key, @required this.userRepository})
-      : assert(userRepository != null),
-        super(key: key);
+class IndependentVolunteerPage extends StatefulWidget {
+  IndependentVolunteerPage({Key key}) : super(key: key);
 
-  _onSignUpButtonPressed(context) {
-    BlocProvider.of<AuthenticationBloc>(context).add(
-      AuthenticationStarted(),
-    );
-  }
+  @override
+  _IndependentVolunteerPageState createState() =>
+      _IndependentVolunteerPageState();
+}
 
+class _IndependentVolunteerPageState extends State<IndependentVolunteerPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,9 +36,11 @@ class LoginPage extends StatelessWidget {
           TrashTagLogo(),
           SizedBox(height: 25.0),
           _title(),
+          SizedBox(height: 25.0),
+          IdependentVolunteerForm(),
           SizedBox(height: 40.0),
-          _loginForm(),
-          _signUp(context),
+          _logIn(context),
+          SizedBox(height: 40.0),
         ],
       ),
     );
@@ -51,38 +48,29 @@ class LoginPage extends StatelessWidget {
 
   Widget _title() {
     return PageTitle(
-      title: 'Welcome, back',
-      subTitle: 'Log in to your account to continue your journey.',
+      title: 'Independent volunteer',
+      subTitle:
+          'Sign up as a solo volunteer if you are cleaning by your own. Thar is, without an environment organization',
     );
   }
 
-  Widget _loginForm() {
-    return BlocProvider(
-      create: (context) {
-        return LoginBloc(
-          authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
-          userRepository: userRepository,
-        );
-      },
-      child: LoginForm(),
-    );
-  }
-
-  Widget _signUp(BuildContext context) {
+  Widget _logIn(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          "Don't have an account?",
+          "Already have an account?",
           style: TextStyle(fontSize: 16.0),
         ),
         FlatButton(
           child: Text(
-            "Sign up",
+            "Log in",
             style: TextStyle(fontSize: 16.0),
           ),
           onPressed: () {
-            return _onSignUpButtonPressed(context);
+            BlocProvider.of<AuthenticationBloc>(context).add(
+              AuthenticationLoggedOut(),
+            );
           },
         )
       ],
