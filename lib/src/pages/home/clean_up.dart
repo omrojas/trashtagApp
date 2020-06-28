@@ -19,9 +19,15 @@ class _CleanUpState extends State<CleanUp> {
   Widget _content() {
     return Card(
       elevation: 4.0,
-      color: Colors.amber[200],
       child: Container(
         padding: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.amber[300], Colors.white]
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
