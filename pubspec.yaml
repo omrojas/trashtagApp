@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   flutter_secure_storage: ^3.3.3
+  graphql_flutter: ^3.0.0
   flutter_bloc: ^4.0.1
   equatable: ^1.2.0
   rxdart: ^0.24.1
@@ -58,6 +59,7 @@ flutter:
   assets:
     - assets/images/trashtag.png
     - assets/images/temp.jpg
+    - assets/images/PORTADA.jpeg
   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
