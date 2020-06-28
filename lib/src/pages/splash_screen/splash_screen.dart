@@ -52,9 +52,9 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           SizedBox(height: 20.0),
           _welcomeMessage(),
-          SizedBox(height: 20.0),
+          SizedBox(height: 40.0),
           _loginButton(),
-          SizedBox(height: 20.0),
+          SizedBox(height: 40.0),
           _signUp(),
         ],
       ),
@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
       child: ListTile(
         title: Text(
           'Join us in this adveture.',
-          style: TextStyle(fontSize: 70),
+          style: TextStyle(fontSize: 60),
         ),
       ),
     );
@@ -103,7 +103,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             onPressed: _onSignUpAsIndependentVolunteer,
           ),
-          SizedBox(height: 20.0),
           FlatButton(
             child: Text(
               'ORGANIZATION VOLUNTEER',
