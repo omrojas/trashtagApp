@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
-import 'package:trashtagApp/src/pages/login/login_form.dart';
+import 'package:trashtagApp/src/screens/login/login_form.dart';
 import 'package:trashtagApp/src/repository/user_repository.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';

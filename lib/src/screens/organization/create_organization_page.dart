@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/pages/organization/organization_form.dart';
+import 'package:trashtagApp/src/screens/organization/organization_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trashtagApp/src/pages/login/login_page.dart';
-import 'package:trashtagApp/src/pages/signup/independent_volunteer_page.dart';
-import 'package:trashtagApp/src/pages/signup/organization_volunteer_page.dart';
 
 import 'src/bloc/authentication/authentication_bloc.dart';
-import 'src/pages/home/home_page.dart';
-import 'src/pages/login/login_page.dart';
-import 'src/pages/splash_screen/splash_screen.dart';
 import 'src/repository/user_repository.dart';
+import 'src/screens/home/home_page.dart';
+import 'src/screens/login/login_page.dart';
+import 'src/screens/signup/independent_volunteer_page.dart';
+import 'src/screens/signup/organization_volunteer_page.dart';
+import 'src/screens/splash_screen/splash_screen.dart';
 import 'src/widgets/loading_indicator.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -32,6 +31,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final userRepository = UserRepository();
 
@@ -41,7 +41,9 @@ void main() {
         return AuthenticationBloc(userRepository: userRepository)
           ..add(AuthenticationStarted());
       },
-      child: TrashTagApp(userRepository: userRepository),
+      child: TrashTagApp(
+        userRepository: userRepository,
+      ),
     ),
   );
 }

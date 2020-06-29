@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
-import 'package:trashtagApp/src/pages/signup/organization_volunteer_form.dart';
+import 'package:trashtagApp/src/screens/signup/organization_volunteer_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 

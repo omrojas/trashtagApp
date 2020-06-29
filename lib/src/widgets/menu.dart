@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/pages/collect/collect_page.dart';
+import 'package:trashtagApp/src/screens/collect/collect_page.dart';
 
 class Menu extends StatefulWidget {
   Menu({Key key}) : super(key: key);

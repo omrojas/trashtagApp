@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/pages/organization/create_organization_page.dart';
+import 'package:trashtagApp/src/screens/organization/create_organization_page.dart';
 
 class OrganizationVolunteerForm extends StatefulWidget {
   const OrganizationVolunteerForm({Key key}) : super(key: key);

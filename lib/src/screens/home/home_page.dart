@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
-import 'package:trashtagApp/src/pages/contact/contact_page.dart';
-import 'package:trashtagApp/src/pages/home/clean_up.dart';
-import 'package:trashtagApp/src/pages/items_collected/items_collected_page.dart';
+import 'package:trashtagApp/src/screens/contact/contact_page.dart';
+import 'package:trashtagApp/src/screens/home/clean_up.dart';
+import 'package:trashtagApp/src/screens/items_collected/items_collected_page.dart';
 import 'package:trashtagApp/src/widgets/menu.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_app_bar.dart';
