@@ -14,7 +14,7 @@ class _ItemsCollectedPageState extends State<ItemsCollectedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: _content(),
@@ -49,7 +49,9 @@ class _ItemsCollectedPageState extends State<ItemsCollectedPage> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        border: Border.all(width: 2.0, color: Colors.indigo[700]),
+        border: Border.all(
+          color: Theme.of(context).backgroundColor,
+        ),
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
       height: 400.0,

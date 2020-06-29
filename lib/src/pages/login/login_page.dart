@@ -38,7 +38,9 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          TrashTagLogo(),
+          TrashTagLogo(
+            assetName: 'assets/images/TrashTagLogo02.png',
+          ),
           SizedBox(height: 25.0),
           _title(),
           SizedBox(height: 40.0),
@@ -51,7 +53,7 @@ class LoginPage extends StatelessWidget {
 
   Widget _title() {
     return PageTitle(
-      title: 'Welcome, back',
+      title: 'Welcome back',
       subTitle: 'Log in to your account to continue your journey.',
     );
   }

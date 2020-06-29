@@ -33,7 +33,7 @@ class _IndependentVolunteerPageState extends State<IndependentVolunteerPage> {
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          TrashTagLogo(),
+          TrashTagLogo(assetName: 'assets/images/TrashTagLogo02.png'),
           SizedBox(height: 25.0),
           _title(),
           SizedBox(height: 25.0),
@@ -50,7 +50,7 @@ class _IndependentVolunteerPageState extends State<IndependentVolunteerPage> {
     return PageTitle(
       title: 'Independent volunteer',
       subTitle:
-          'Sign up as a solo volunteer if you are cleaning by your own. Thar is, without an environment organization',
+          'Sign up as a solo volunteer if you are cleaning by your own. That is, without an environment organization',
     );
   }
 

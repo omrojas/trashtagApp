@@ -22,10 +22,14 @@ class _CleanUpState extends State<CleanUp> {
       child: Container(
         padding: EdgeInsets.all(20.0),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.amber[300], Colors.white]
+          color: Colors.teal[700],
+          image: DecorationImage(
+            image: AssetImage('assets/images/cleanUp.jpeg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(.5),
+              BlendMode.dstATop,
+            ),
           ),
         ),
         child: Column(
@@ -47,7 +51,8 @@ class _CleanUpState extends State<CleanUp> {
     return Text(
       'Clean up!',
       style: TextStyle(
-        fontSize: 30.0,
+        color: Colors.white,
+        fontSize: 35.0,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -57,6 +62,7 @@ class _CleanUpState extends State<CleanUp> {
     return Text(
       'Help us to collect information about littering in public open spaces.',
       style: TextStyle(
+        color: Colors.white,
         fontSize: 20.0,
       ),
     );
@@ -64,11 +70,9 @@ class _CleanUpState extends State<CleanUp> {
 
   Widget _startCleanigButton() {
     return RaisedButton(
-      padding: EdgeInsets.all(12.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
-      color: Colors.teal,
       child: Text(
         'START CLEANING',
         style: TextStyle(color: Colors.white, fontSize: 18.0),

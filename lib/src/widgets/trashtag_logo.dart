@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class TrashTagLogo extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
+  final String assetName;
   const TrashTagLogo(
-      {Key key, this.mainAxisAlignment = MainAxisAlignment.start})
+      {Key key,
+      this.mainAxisAlignment = MainAxisAlignment.start,
+      this.assetName = 'assets/images/trashtag.png'})
       : super(key: key);
 
   @override
@@ -20,7 +23,7 @@ class TrashTagLogo extends StatelessWidget {
           width: 180.0,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/trashtag.png'),
+              image: AssetImage(assetName),
               fit: BoxFit.cover,
             ),
           ),

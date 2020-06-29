@@ -23,7 +23,7 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -47,7 +47,7 @@ class _ContactPageState extends State<ContactPage> {
     return Column(
       children: <Widget>[
         Container(
-          color: Colors.indigo[700],
+          color: Theme.of(context).backgroundColor,
           height: 270.0,
         ),
       ],
@@ -90,7 +90,10 @@ class _ContactPageState extends State<ContactPage> {
   Widget _input(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20.0),
-      color: Colors.white,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
       child: Column(
         children: <Widget>[
           TextFormField(
@@ -120,7 +123,6 @@ class _ContactPageState extends State<ContactPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
           'SEND MESSAGE',
           style: TextStyle(fontSize: 18.0, color: Colors.white),
@@ -133,7 +135,7 @@ class _ContactPageState extends State<ContactPage> {
   Widget _successAlert() {
     return AlertDialog(
       title: Text('Thanks!'),
-      content: Text('We will send you a message as sonn as we can.'),
+      content: Text('We will send you a message as soon as we can.'),
       actions: <Widget>[
         FlatButton(
           onPressed: () {
@@ -144,7 +146,9 @@ class _ContactPageState extends State<ContactPage> {
           },
           child: Text(
             'GO TO MY DASHBOARD',
-            style: TextStyle(color: Colors.teal),
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         )
       ],

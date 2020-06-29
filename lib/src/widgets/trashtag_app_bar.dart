@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
-Widget appBar() {
+Widget appBar(BuildContext context) {
   return AppBar(
     title: _logo(),
-    backgroundColor: Colors.indigo[800],
+    actions: [
+      Builder(
+        builder: (context) => IconButton(
+          icon: Icon(Icons.more_vert),
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
+          // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+        ),
+      ),
+    ],
   );
 }
 

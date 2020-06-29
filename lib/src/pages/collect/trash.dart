@@ -5,16 +5,16 @@ class Trash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _trash();
+    return _trash(context);
   }
 
-  Widget _trash() {
+  Widget _trash(BuildContext context) {
     return Card(
       elevation: 4.0,
       child: Column(
         children: <Widget>[
           _imageAndName(),
-          _actions(),
+          _actions(context),
         ],
       ),
     );
@@ -25,7 +25,6 @@ class Trash extends StatelessWidget {
       height: 130.0,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.amber,
         image: DecorationImage(
           image: AssetImage('assets/images/temp.jpg'),
           fit: BoxFit.cover,
@@ -35,23 +34,23 @@ class Trash extends StatelessWidget {
     );
   }
 
-  Widget _actions() {
+  Widget _actions(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 4.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buttons(),
-          _counter(),
+          _buttons(context),
+          _counter(context),
         ],
       ),
     );
   }
 
-  Widget _buttons() {
+  Widget _buttons(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.indigo[800],
+        color: Theme.of(context).backgroundColor,
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
       child: Row(
@@ -71,13 +70,13 @@ class Trash extends StatelessWidget {
     );
   }
 
-  Widget _counter() {
+  Widget _counter(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12.0),
       height: 47.0,
       width: 80.0,
       decoration: BoxDecoration(
-        color: Colors.teal,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
       child: Text(

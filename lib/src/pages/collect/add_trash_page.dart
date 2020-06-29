@@ -22,7 +22,7 @@ class _AddTrahsPageState extends State<AddTrahsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: _content(),
@@ -80,7 +80,6 @@ class _AddTrahsPageState extends State<AddTrahsPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
           'SUBMIT ITEM',
           style: TextStyle(fontSize: 18.0, color: Colors.white),
@@ -104,7 +103,9 @@ class _AddTrahsPageState extends State<AddTrahsPage> {
           },
           child: Text(
             'RESUME CLEAN UP',
-            style: TextStyle(color: Colors.teal),
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         )
       ],

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       endDrawer: _endDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   Widget _endDrawer() {
     return Drawer(
       child: Container(
-        color: Colors.indigo[700],
+        color: Theme.of(context).backgroundColor,
         child: Column(
           children: <Widget>[
             SizedBox(height: 40.0),

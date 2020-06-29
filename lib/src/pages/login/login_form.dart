@@ -72,9 +72,8 @@ class _LoginFormState extends State<LoginForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
-          'GO TO DASHBOARD',
+          'GO TO MY DASHBOARD',
           style: TextStyle(fontSize: 18.0, color: Colors.white),
         ),
         onPressed: state is! LoginInProgress ? _onLoginButtonPressed : null,

@@ -57,15 +57,30 @@ class TrashTagApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Trash Tag',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: trashtagTheme(),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           return _diplayScreen(state);
         },
       ),
+    );
+  }
+
+  ThemeData trashtagTheme() {
+    // Primary color:   00A79D => 0, 167, 157,
+    // AccentColor color: FFC107 => 255,193,7
+    // Background:      22223B => 34,34,59
+
+    return ThemeData(
+      primaryColor: Color.fromRGBO(0, 167, 157, 1),
+      accentColor: Color.fromRGBO(255, 193, 7, 1),
+      appBarTheme: AppBarTheme(
+        color: Color.fromRGBO(34, 34, 59, 1),
+      ),
+      buttonColor: Color.fromRGBO(0, 167, 157, 1),
+      backgroundColor: Color.fromRGBO(34, 34, 59, 1),
+      fontFamily: 'Montserrat',
+      visualDensity: VisualDensity.adaptivePlatformDensity,
     );
   }
 

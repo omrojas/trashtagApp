@@ -33,7 +33,7 @@ class _OrganizationVolunteerPageState extends State<OrganizationVolunteerPage> {
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          TrashTagLogo(),
+          TrashTagLogo(assetName: 'assets/images/TrashTagLogo02.png'),
           SizedBox(height: 25.0),
           _title(),
           SizedBox(height: 25.0),
@@ -48,9 +48,9 @@ class _OrganizationVolunteerPageState extends State<OrganizationVolunteerPage> {
 
   Widget _title() {
     return PageTitle(
-      title: 'Organizer volunteer',
+      title: 'Organization volunteer',
       subTitle:
-          'Sign up as an organization volunteer if you belong to an afficial organization.',
+          'Sign up as an organization volunteer if you belong to an official organization.',
     );
   }
 

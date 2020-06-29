@@ -39,7 +39,7 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Enter your password',
-              helperText: 'Password mut contain 8 characters min',
+              helperText: 'Password must contain 8 characters min.',
             ),
           ),
           SizedBox(height: 40),
@@ -57,7 +57,6 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
           'CREATE YOUR ACCOUNT',
           style: TextStyle(fontSize: 18.0, color: Colors.white),

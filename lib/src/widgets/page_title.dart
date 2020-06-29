@@ -18,7 +18,7 @@ class PageTitle extends StatelessWidget {
         child: Text(
           this.subTitle,
           style: TextStyle(fontSize: 20.0),
-          textAlign: TextAlign.justify,
+          textAlign: TextAlign.left,
         ),
       ),
     );

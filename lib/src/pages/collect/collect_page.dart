@@ -17,7 +17,7 @@ class _CollectPageState extends State<CollectPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: _content(),
@@ -30,6 +30,7 @@ class _CollectPageState extends State<CollectPage> {
 
   Widget _addTrash() {
     return FloatingActionButton(
+      backgroundColor: Theme.of(context).accentColor,
       child: Icon(
         Icons.add,
         color: Colors.white,

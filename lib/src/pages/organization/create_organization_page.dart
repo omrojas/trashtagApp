@@ -29,7 +29,9 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
-          TrashTagLogo(),
+          TrashTagLogo(
+            assetName: 'assets/images/TrashTagLogo02.png',
+          ),
           _title(),
           OrganizationForm(),
           SizedBox(height: 20.0),

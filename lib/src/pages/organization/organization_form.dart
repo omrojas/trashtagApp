@@ -130,9 +130,8 @@ class _OrganizationFormState extends State<OrganizationForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
-          'CREATE YOUR ORGANIZATION',
+          'SUBMIT ORGANIZATION',
           style: TextStyle(fontSize: 18.0, color: Colors.white),
         ),
         onPressed: () => {},

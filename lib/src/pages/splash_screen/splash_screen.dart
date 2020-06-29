@@ -32,11 +32,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: _content(),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/PORTADA.jpeg'),
+          alignment: Alignment.topCenter,
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+            Colors.black.withOpacity(0.9),
+            BlendMode.dstATop,
+          ),
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: _content(),
+          ),
         ),
       ),
     );
@@ -50,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
           TrashTagLogo(
             mainAxisAlignment: MainAxisAlignment.end,
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 50.0),
           _welcomeMessage(),
           SizedBox(height: 40.0),
           _loginButton(),
@@ -65,8 +78,13 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       child: ListTile(
         title: Text(
-          'Join us in this adveture.',
-          style: TextStyle(fontSize: 60),
+          'Join us in this adventure.',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Montserrat',
+            fontSize: 55,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -80,10 +98,14 @@ class _SplashScreenState extends State<SplashScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.amber,
+        color: Theme.of(context).accentColor,
         child: Text(
           'LOG IN',
-          style: TextStyle(color: Colors.white70, fontSize: 18.0),
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         onPressed: _onLoginButtonPressed,
       ),
@@ -94,19 +116,33 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       child: Column(
         children: <Widget>[
-          Text('New member? Sign up as a'),
+          Text(
+            'New member? Sign up as a',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           SizedBox(height: 20.0),
           FlatButton(
             child: Text(
               'INDEPENDENT VOLUNTEER',
-              style: TextStyle(color: Colors.amber, fontSize: 18.0),
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             onPressed: _onSignUpAsIndependentVolunteer,
           ),
           FlatButton(
             child: Text(
               'ORGANIZATION VOLUNTEER',
-              style: TextStyle(color: Colors.amber, fontSize: 18.0),
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             onPressed: _onSignUpAsOrganizationVolunteer,
           )

@@ -56,7 +56,7 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Enter your passwords',
-              helperText: 'Password mut contain 8 characters min',
+              helperText: 'Password must contain 8 characters min.',
             ),
           ),
           SizedBox(height: 40),
@@ -86,7 +86,6 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        color: Colors.teal,
         child: Text(
           'CREATE YOUR ACCOUNT',
           style: TextStyle(
