@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/bloc/authentication/authentication_bloc.dart';
+import 'src/bloc/simple_delegate.dart';
 import 'src/repository/user_repository.dart';
 import 'src/screens/home/home_page.dart';
 import 'src/screens/login/login_page.dart';
@@ -9,26 +10,6 @@ import 'src/screens/signup/independent_volunteer_page.dart';
 import 'src/screens/signup/organization_volunteer_page.dart';
 import 'src/screens/splash_screen/splash_screen.dart';
 import 'src/widgets/loading_indicator.dart';
-
-class SimpleBlocDelegate extends BlocDelegate {
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    print(event);
-    super.onEvent(bloc, event);
-  }
-
-  @override
-  void onTransition(Bloc bloc, Transition transition) {
-    print(transition);
-    super.onTransition(bloc, transition);
-  }
-
-  @override
-  void onError(Bloc bloc, Object error, StackTrace stackTrace) {
-    print(error);
-    super.onError(bloc, error, stackTrace);
-  }
-}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +36,6 @@ class TrashTagApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build MyApp');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Trash Tag',
@@ -87,7 +67,6 @@ class TrashTagApp extends StatelessWidget {
   }
 
   Widget _diplayScreen(AuthenticationState state) {
-    print('state $state');
     if (state is AuthenticationInitial) {
       return SplashScreen();
     }
