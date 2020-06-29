@@ -60,6 +60,11 @@ flutter:
     - assets/images/trashtag.png
     - assets/images/temp.jpg
     - assets/images/PORTADA.jpeg
+    - assets/images/TrashTagLogo02.png
+    - assets/images/cleanUp.jpeg
+    - assets/images/clean-up.png
+    - assets/images/home.png
+    - assets/images/my-list.png
   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -72,11 +77,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
