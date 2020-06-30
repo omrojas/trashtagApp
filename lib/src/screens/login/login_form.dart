@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
+import 'package:trashtagApp/src/stream_controllers/login/login_stream_controller.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -8,16 +9,26 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _streamController = LoginController();
+  bool _passwordVisible = true;
 
   _onLoginButtonPressed() {
     BlocProvider.of<LoginBloc>(context).add(
       LoginButtonPressed(
-        username: _usernameController.text,
-        password: _passwordController.text,
+        username: _streamController.email,
+        password: _streamController.password,
       ),
     );
+  }
+
+  _changePasswordVisible() {
+    setState(() => _passwordVisible = !_passwordVisible);
+  }
+
+  @override
+  void dispose() {
+    _streamController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,17 +56,9 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
       child: Column(
         children: [
-          TextFormField(
-            decoration: InputDecoration(hintText: 'Enter your email'),
-            keyboardType: TextInputType.emailAddress,
-            controller: _usernameController,
-          ),
+          _email(),
           SizedBox(height: 25.0),
-          TextFormField(
-            decoration: InputDecoration(hintText: 'Enter your password'),
-            obscureText: true,
-            controller: _passwordController,
-          ),
+          _password(),
           SizedBox(height: 40.0),
           _loginButton(state),
           _progressIndicator(state)
@@ -64,20 +67,64 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  Widget _email() {
+    return StreamBuilder<String>(
+      stream: _streamController.emailStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return TextFormField(
+          decoration: InputDecoration(
+            hintText: 'Enter your email',
+            errorText: snapshot.error,
+          ),
+          keyboardType: TextInputType.emailAddress,
+          onChanged: _streamController.changeEmail,
+        );
+      },
+    );
+  }
+
+  Widget _password() {
+    return StreamBuilder<String>(
+      stream: _streamController.passwordStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return TextFormField(
+          decoration: InputDecoration(
+            hintText: 'Enter your password',
+            errorText: snapshot.error,
+            suffixIcon: IconButton(
+              icon: Icon(
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off),
+              onPressed: _changePasswordVisible,
+            ),
+          ),
+          obscureText: _passwordVisible,
+          onChanged: _streamController.changePassword,
+        );
+      },
+    );
+  }
+
   Widget _loginButton(LoginState state) {
-    return Container(
-      width: double.infinity,
-      child: RaisedButton(
-        padding: EdgeInsets.symmetric(vertical: 12.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Text(
-          'GO TO MY DASHBOARD',
-          style: TextStyle(fontSize: 18.0, color: Colors.white),
-        ),
-        onPressed: state is! LoginInProgress ? _onLoginButtonPressed : null,
-      ),
+    return StreamBuilder<bool>(
+      stream: _streamController.validFormStream,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return Container(
+          width: double.infinity,
+          child: RaisedButton(
+            padding: EdgeInsets.symmetric(vertical: 12.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Text(
+              'GO TO MY DASHBOARD',
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            onPressed: (state is! LoginInProgress && snapshot.hasData)
+                ? _onLoginButtonPressed
+                : null,
+          ),
+        );
+      },
     );
   }
 

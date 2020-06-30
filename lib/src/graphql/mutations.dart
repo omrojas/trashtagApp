@@ -1,6 +1,9 @@
 class Mutations {
-  String login(String username, String password) {
-    return '''
+  final String login = '''
+      mutation tokenAuth(\$userName: String!, \$password: String!) {
+        tokenAuth(username: \$userName, password: \$password) {
+          token
+        }
+      }
     ''';
-  }
 }
