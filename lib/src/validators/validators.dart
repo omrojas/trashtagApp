@@ -10,7 +10,7 @@ class Validators {
         if (regExp.hasMatch(email)) {
           sink.add(email);
         } else {
-          sink.addError('Email no es correcto');
+          sink.addError('Enter a valid email');
         }
       }
     },
@@ -22,7 +22,7 @@ class Validators {
         if (password.trim().length >= 1) {
           sink.add(password);
         } else {
-          sink.addError('Ingrese la contraseña por favor');
+          sink.addError('Enter a valid password');
         }
       }
     },
@@ -34,7 +34,7 @@ class Validators {
         if (name.trim().length >= 1) {
           sink.add(name);
         } else {
-          sink.addError('Ingrese el nombre por favor');
+          sink.addError('Enter a valid name');
         }
       }
     },
@@ -49,7 +49,7 @@ class Validators {
         if (phone.toString().length == 10 && regExp.hasMatch(phone)) {
           sink.add(phone);
         } else {
-          sink.addError('Ingrese un número valido por favor');
+          sink.addError('Enter a valid number');
         }
       }
     },
