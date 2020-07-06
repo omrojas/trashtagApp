@@ -1,30 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
+import 'package:trashtagApp/src/bloc/signup/independent/independent_signup_bloc.dart';
+import 'package:trashtagApp/src/repository/user_repository.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 import 'independent_volunteer_form.dart';
 
-class IndependentVolunteerPage extends StatefulWidget {
-  IndependentVolunteerPage({Key key}) : super(key: key);
+class IndependentVolunteerPage extends StatelessWidget {
+  final UserRepository userRepository;
 
-  @override
-  _IndependentVolunteerPageState createState() =>
-      _IndependentVolunteerPageState();
-}
+  IndependentVolunteerPage({Key key, @required this.userRepository})
+      : assert(userRepository != null),
+        super(key: key);
 
-class _IndependentVolunteerPageState extends State<IndependentVolunteerPage> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            child: _content(context),
+            child: _blocProvider(context),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _blocProvider(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return IndependentSignUpBloc(
+          userRepository: userRepository,
+        );
+      },
+      child: _content(context),
     );
   }
 
@@ -68,12 +78,16 @@ class _IndependentVolunteerPageState extends State<IndependentVolunteerPage> {
             style: TextStyle(fontSize: 16.0),
           ),
           onPressed: () {
-            BlocProvider.of<AuthenticationBloc>(context).add(
-              AuthenticationLoggedOut(),
-            );
+            _onLoginButtonPressed(context);
           },
         )
       ],
+    );
+  }
+
+  _onLoginButtonPressed(BuildContext context) {
+    BlocProvider.of<AuthenticationBloc>(context).add(
+      AuthenticationLoggedOut(),
     );
   }
 }

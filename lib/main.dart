@@ -83,10 +83,10 @@ class TrashTagApp extends StatelessWidget {
       return LoadingIndicator();
     }
     if (state is SignUpAsIndependentVolunteer) {
-      return IndependentVolunteerPage();
+      return IndependentVolunteerPage(userRepository: userRepository);
     }
     if (state is SignUpAsOrganizationVolunteer) {
-      return OrganizationVolunteerPage();
+      return OrganizationVolunteerPage(userRepository: userRepository);
     }
     return SplashScreen();
   }
