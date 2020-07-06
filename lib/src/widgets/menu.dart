@@ -75,7 +75,10 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget _menuButton({String name, String assetName, Function onPresed}) {
+  Widget _menuButton(
+      {@required String name,
+      @required String assetName,
+      @required Function onPresed}) {
     return _buttonContainer(
         child: FlatButton(
       onPressed: onPresed,
@@ -89,14 +92,14 @@ class _MenuState extends State<Menu> {
     ));
   }
 
-  Widget _buttonContainer({FlatButton child}) {
+  Widget _buttonContainer({@required FlatButton child}) {
     return Container(
       height: 65.0,
       child: child,
     );
   }
 
-  Widget _buttonIcon({String assetName}) {
+  Widget _buttonIcon({@required String assetName}) {
     return Container(
       height: 40.0,
       width: 60.0,
@@ -109,7 +112,7 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget _buttonText({String text}) {
+  Widget _buttonText({@required String text}) {
     return Text(
       text,
       style: TextStyle(

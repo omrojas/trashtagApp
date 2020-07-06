@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class PageTitle extends StatelessWidget {
   final String title;
   final String subTitle;
-  const PageTitle({Key key, this.title, this.subTitle}) : super(key: key);
+  const PageTitle({Key key, @required this.title, @required this.subTitle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

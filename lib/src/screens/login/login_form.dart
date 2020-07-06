@@ -12,7 +12,7 @@ class _LoginFormState extends State<LoginForm> {
   final _streamController = LoginController();
   bool _passwordVisible = true;
 
-  _onLoginButtonPressed() {
+  void _onLoginButtonPressed() {
     BlocProvider.of<LoginBloc>(context).add(
       LoginButtonPressed(
         username: _streamController.email,
@@ -21,7 +21,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  _changePasswordVisible() {
+  void _changePasswordVisible() {
     setState(() => _passwordVisible = !_passwordVisible);
   }
 

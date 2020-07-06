@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class TrashTagLogo extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final String assetName;
-  const TrashTagLogo(
-      {Key key,
-      this.mainAxisAlignment = MainAxisAlignment.start,
-      this.assetName = 'assets/images/trashtag.png'})
-      : super(key: key);
+  const TrashTagLogo({
+    Key key,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.assetName = 'assets/images/trashtag.png',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
