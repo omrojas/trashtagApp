@@ -33,13 +33,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
 
         if (token == null) {
-          throw ('An error has occurred, please check the credentials or try again later.');
+          throw ('');
         }
 
         authenticationBloc.add(AuthenticationLoggedIn(token: token));
         yield LoginInitial();
       } catch (error) {
-        yield LoginFailure(error: error.toString());
+        yield LoginFailure(
+            error:
+                'An error has occurred, please check the credentials or try again later.');
       }
     }
   }
