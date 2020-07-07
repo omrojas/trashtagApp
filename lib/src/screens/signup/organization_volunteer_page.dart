@@ -15,15 +15,15 @@ class OrganizationVolunteerPage extends StatelessWidget {
         super(key: key);
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _blocProvider(context),
+        return Container(
+          child: Scaffold(
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: _blocProvider(context),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
   }
 
   Widget _blocProvider(BuildContext context) {
