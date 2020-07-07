@@ -1,26 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/screens/organization/organization_form.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trashtagApp/src/bloc/create_organization/create_organization_bloc.dart';
+import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
+import 'package:trashtagApp/src/repository/organization_repository.dart';
+import 'package:trashtagApp/src/screens/organization/create_organization_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
-class CreateOrganizationPage extends StatefulWidget {
-  CreateOrganizationPage({Key key}) : super(key: key);
+class CreateOrganizationPage extends StatelessWidget {
+  final OrganizationRepository organizationRepository;
+  CreateOrganizationPage({Key key, @required this.organizationRepository})
+      : assert(organizationRepository != null),
+        super(key: key);
 
-  @override
-  _CreateOrganizationPageState createState() => _CreateOrganizationPageState();
-}
+  void _onCancelButtonPressed(BuildContext context) async {
+    BlocProvider.of<OrganizerSignUpBloc>(context).add(
+      OrganizerSignUpStarted(),
+    );
+  }
 
-class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            child: _content(context),
+            child: _blocProvider(context),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _blocProvider(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return CreateOrganizationBloc(
+          repository: organizationRepository,
+        );
+      },
+      child: _content(context),
     );
   }
 
@@ -33,8 +51,10 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
             assetName: 'assets/images/TrashTagLogo02.png',
           ),
           _title(),
-          OrganizationForm(),
-          SizedBox(height: 20.0),
+          SizedBox(height: 40.0),
+          CreateOrganizationForm(),
+          _cancel(context),
+          SizedBox(height: 25.0),
         ],
       ),
     );
@@ -44,6 +64,24 @@ class _CreateOrganizationPageState extends State<CreateOrganizationPage> {
     return PageTitle(
       title: 'New Organization',
       subTitle: 'Submit a new Organization to our database.',
+    );
+  }
+
+  Widget _cancel(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('I am not sure,'),
+        FlatButton(
+          onPressed: () {
+            _onCancelButtonPressed(context);
+          },
+          child: Text(
+            'Cancel !',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
     );
   }
 }

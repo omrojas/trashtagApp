@@ -75,23 +75,6 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    final organization = new DropdownMenuItem(
-      child: Text('Create organization'),
-      value: 1,
-      onTap: () {
-        print('Create organization');
-        _onCreateOrganizationButtonPressed();
-      },
-    );
-
-    _organizations.add(organization);
-    setState(() {});
-  }
-
-  @override
   void dispose() {
     _streamController.dispose();
     super.dispose();
@@ -127,11 +110,12 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
     return Form(
       child: Column(
         children: <Widget>[
+          _createOrganization(),
+          _selectOrganization(),
+          SizedBox(height: 25),
           _name(),
           SizedBox(height: 25),
           _email(),
-          SizedBox(height: 25),
-          _selectOrganization(),
           SizedBox(height: 25),
           _password(),
           SizedBox(height: 40),
@@ -168,6 +152,18 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
           onChanged: _streamController.changeEmail,
         );
       },
+    );
+  }
+
+  Widget _createOrganization() {
+    return ListTile(
+      contentPadding: EdgeInsets.all(0.0),
+      title: Text(
+        'Add your organization',
+        textAlign: TextAlign.end,
+      ),
+      trailing: Icon(Icons.add),
+      onTap: _onCreateOrganizationButtonPressed,
     );
   }
 

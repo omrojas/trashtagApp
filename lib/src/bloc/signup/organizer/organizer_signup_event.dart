@@ -7,6 +7,8 @@ abstract class OrganizerSignUpEvent extends Equatable {
   const OrganizerSignUpEvent();
 }
 
+class OrganizerSignUpStarted extends OrganizerSignUpEvent {}
+
 class CreateAccountButtonPressed extends OrganizerSignUpEvent {
   final String name;
   final String email;

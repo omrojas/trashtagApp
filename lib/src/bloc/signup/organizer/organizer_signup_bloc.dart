@@ -23,6 +23,10 @@ class OrganizerSignUpBloc
   Stream<OrganizerSignUpState> mapEventToState(
     OrganizerSignUpEvent event,
   ) async* {
+    if (event is OrganizerSignUpStarted) {
+      yield OrganizerSignUpInitial();
+    }
+
     if (event is CreateAccountButtonPressed) {
       try {
         yield OrganizerSignUpInProgress();

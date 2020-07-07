@@ -2,38 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
+import 'package:trashtagApp/src/repository/organization_repository.dart';
 import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/screens/organization/create_organization_page.dart';
 import 'package:trashtagApp/src/screens/signup/organization_volunteer_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class OrganizationVolunteerPage extends StatelessWidget {
   final UserRepository userRepository;
+  final organizationRepository = OrganizationRepository();
 
   OrganizationVolunteerPage({Key key, @required this.userRepository})
       : assert(userRepository != null),
         super(key: key);
 
   Widget build(BuildContext context) {
-        return Container(
-          child: Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: _blocProvider(context),
-              ),
-            ),
-          ),
-        );
+    return _blocProvider();
   }
 
-  Widget _blocProvider(BuildContext context) {
+  Widget _blocProvider() {
     return BlocProvider(
       create: (context) {
-        return OrganizerSignUpBloc(
-          userRepository: userRepository,
-        );
+        return OrganizerSignUpBloc(userRepository: userRepository);
       },
-      child: _content(context),
+      child: BlocBuilder<OrganizerSignUpBloc, OrganizerSignUpState>(
+        builder: (context, state) {
+          if (state is ViewOrganization) {
+            return CreateOrganizationPage(
+              organizationRepository: organizationRepository,
+            );
+          }
+          return _body(context);
+        },
+      ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return Container(
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: _content(context),
+          ),
+        ),
+      ),
     );
   }
 
