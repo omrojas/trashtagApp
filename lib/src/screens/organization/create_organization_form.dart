@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/create_organization/create_organization_bloc.dart';
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
+import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/stream_controllers/organization/create_organization_controller.dart';
 
 class CreateOrganizationForm extends StatefulWidget {
@@ -15,17 +16,19 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   final _streamController = CreateOrganizationController();
 
   void _onSubmitButtonPressed() {
+    final organization = Organization(
+      name: _streamController.name,
+      operationArea: _streamController.area,
+      phoneOne: _streamController.phoneOne,
+      phoneTwo: _streamController.phoneTwo,
+      address: _streamController.address,
+      managerName: _streamController.managerName,
+      managerPhone: _streamController.managerPhone,
+      managerEmail: _streamController.managerEmail,
+    );
+
     BlocProvider.of<CreateOrganizationBloc>(context).add(
-      SubmitButtonPressed(
-        name: _streamController.name,
-        area: _streamController.area,
-        phone1: _streamController.phone1,
-        phone2: _streamController.phone2,
-        addres: _streamController.address,
-        managerName: _streamController.managerName,
-        managerPhone: _streamController.managerPhone,
-        managerEmail: _streamController.managerEmail,
-      ),
+      SubmitButtonPressed(organization: organization),
     );
   }
 
@@ -131,11 +134,11 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
       children: <Widget>[
         Container(
           width: (size.width / 2) * .8,
-          child: _phone1(),
+          child: _phoneOne(),
         ),
         Container(
           width: (size.width / 2) * .8,
-          child: _phone2(),
+          child: _phoneTwo(),
         ),
       ],
     );
@@ -192,9 +195,9 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
     );
   }
 
-  Widget _phone1() {
+  Widget _phoneOne() {
     return StreamBuilder<String>(
-      stream: _streamController.phone1Stream,
+      stream: _streamController.phoneOneStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return TextFormField(
           decoration: InputDecoration(
@@ -203,15 +206,15 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
           ),
           maxLength: 10,
           keyboardType: TextInputType.phone,
-          onChanged: _streamController.changePhone1,
+          onChanged: _streamController.changePhoneOne,
         );
       },
     );
   }
 
-  Widget _phone2() {
+  Widget _phoneTwo() {
     return StreamBuilder<String>(
-      stream: _streamController.phone2Stream,
+      stream: _streamController.phoneTwoStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return TextFormField(
           decoration: InputDecoration(
@@ -220,7 +223,7 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
           ),
           maxLength: 10,
           keyboardType: TextInputType.phone,
-          onChanged: _streamController.changePhone2,
+          onChanged: _streamController.changePhoneTwo,
         );
       },
     );

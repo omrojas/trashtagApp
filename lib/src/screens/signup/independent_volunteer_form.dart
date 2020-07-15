@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart'
     as authentication_bloc;
 import 'package:trashtagApp/src/bloc/signup/independent/independent_signup_bloc.dart';
-import 'package:trashtagApp/src/stream_controllers/signup/independent/independent_volunteer_signup_controller.dart';
+import 'package:trashtagApp/src/models/user.dart';
+import 'package:trashtagApp/src/stream_controllers/signup/signup_controller.dart';
 
 class IdependentVolunteerForm extends StatefulWidget {
   IdependentVolunteerForm({Key key}) : super(key: key);
@@ -14,7 +15,7 @@ class IdependentVolunteerForm extends StatefulWidget {
 }
 
 class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
-  final _streamController = IndependentVolunterSignUpController();
+  final _streamController = SignUpController();
   bool _passwordVisible = true;
 
   void _changePasswordVisible() {
@@ -22,12 +23,14 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
   }
 
   void _onSignUpButtonPresed() {
+    final user = User(
+      firstName: _streamController.firstName,
+      lastName: _streamController.lastName,
+      email: _streamController.email,
+      password: _streamController.password,
+    );
     BlocProvider.of<IndependentSignUpBloc>(context).add(
-      CreateAccountButtonPressed(
-        name: _streamController.name,
-        email: _streamController.email,
-        password: _streamController.password,
-      ),
+      CreateAccountButtonPressed(user: user),
     );
   }
 
@@ -103,7 +106,9 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
     return Form(
       child: Column(
         children: <Widget>[
-          _name(),
+          _firstName(),
+          SizedBox(height: 25),
+          _lastName(),
           SizedBox(height: 25),
           _email(),
           SizedBox(height: 25),
@@ -115,16 +120,31 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
     );
   }
 
-  Widget _name() {
+  Widget _firstName() {
     return StreamBuilder<String>(
-      stream: _streamController.nameStream,
+      stream: _streamController.firstNameStream,
       builder: (context, snapshot) {
         return TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter your name',
+            hintText: 'Enter your first name',
             errorText: snapshot.error,
           ),
-          onChanged: _streamController.changeName,
+          onChanged: _streamController.changeFirstName,
+        );
+      },
+    );
+  }
+
+  Widget _lastName() {
+    return StreamBuilder<String>(
+      stream: _streamController.lastNameStream,
+      builder: (context, snapshot) {
+        return TextFormField(
+          decoration: InputDecoration(
+            hintText: 'Enter your last name',
+            errorText: snapshot.error,
+          ),
+          onChanged: _streamController.changeLastName,
         );
       },
     );

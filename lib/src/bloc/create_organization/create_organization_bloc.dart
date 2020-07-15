@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/repository/organization_repository.dart';
 
 part 'create_organization_event.dart';
@@ -25,15 +26,10 @@ class CreateOrganizationBloc
     if (event is SubmitButtonPressed) {
       try {
         yield SubmitInProgress();
+
+        final organization = event.organization;
         final response = await repository.createOrganizations(
-          name: event.name,
-          operationArea: event.area,
-          phone1: event.phone1,
-          phone2: event.phone2,
-          address: event.addres,
-          managerName: event.managerName,
-          managerPhone: event.managerPhone,
-          managerEmail: event.managerEmail,
+          organization: organization,
         );
         print('Response: $response');
         if (response == false) {

@@ -6,8 +6,8 @@ class CreateOrganizationController with Validators {
 
   final _nameController = BehaviorSubject<String>();
   final _areaController = BehaviorSubject<String>();
-  final _phone1Controller = BehaviorSubject<String>();
-  final _phone2Controller = BehaviorSubject<String>();
+  final _phoneOneController = BehaviorSubject<String>();
+  final _phoneTwoController = BehaviorSubject<String>();
   final _addressController = BehaviorSubject<String>();
   final _managerNameController = BehaviorSubject<String>();
   final _managerPhoneController = BehaviorSubject<String>();
@@ -17,10 +17,10 @@ class CreateOrganizationController with Validators {
       _nameController.stream.transform(validateName);
   Stream<String> get areaStream =>
       _areaController.stream.transform(validateName);
-  Stream<String> get phone1Stream =>
-      _phone1Controller.stream.transform(validatePhone);
-  Stream<String> get phone2Stream =>
-      _phone2Controller.stream.transform(validatePhone);
+  Stream<String> get phoneOneStream =>
+      _phoneOneController.stream.transform(validatePhone);
+  Stream<String> get phoneTwoStream =>
+      _phoneTwoController.stream.transform(validatePhone);
   Stream<String> get addressStream =>
       _addressController.stream.transform(validateName);
   Stream<String> get managerNameStream =>
@@ -33,8 +33,8 @@ class CreateOrganizationController with Validators {
   Stream<bool> get validFormStream => Rx.combineLatest8(
       nameStream,
       areaStream,
-      phone1Stream,
-      phone2Stream,
+      phoneOneStream,
+      phoneTwoStream,
       addressStream,
       managerNameStream,
       managerPhoneStream,
@@ -42,8 +42,8 @@ class CreateOrganizationController with Validators {
       (
         name,
         area,
-        phone1,
-        phone2,
+        phoneOne,
+        phoneTwo,
         address,
         managerName,
         managerPhone,
@@ -53,8 +53,8 @@ class CreateOrganizationController with Validators {
 
   Function(String) get changeName => _nameController.sink.add;
   Function(String) get changeArea => _areaController.sink.add;
-  Function(String) get changePhone1 => _phone1Controller.sink.add;
-  Function(String) get changePhone2 => _phone2Controller.sink.add;
+  Function(String) get changePhoneOne => _phoneOneController.sink.add;
+  Function(String) get changePhoneTwo => _phoneTwoController.sink.add;
   Function(String) get changeAddress => _addressController.sink.add;
   Function(String) get changeManagerName => _managerNameController.sink.add;
   Function(String) get changeManagerPhone => _managerPhoneController.sink.add;
@@ -62,8 +62,8 @@ class CreateOrganizationController with Validators {
 
   String get name => _nameController.value;
   String get area => _areaController.value;
-  String get phone1 => _phone1Controller.value;
-  String get phone2 => _phone2Controller.value;
+  String get phoneOne => _phoneOneController.value;
+  String get phoneTwo => _phoneTwoController.value;
   String get address => _addressController.value;
   String get managerName => _managerNameController.value;
   String get managerPhone => _managerPhoneController.value;
@@ -72,8 +72,8 @@ class CreateOrganizationController with Validators {
   void dispose() {
     _nameController?.close();
     _areaController?.close();
-    _phone1Controller?.close();
-    _phone2Controller?.close();
+    _phoneOneController?.close();
+    _phoneTwoController?.close();
     _addressController?.close();
     _managerNameController?.close();
     _managerPhoneController?.close();

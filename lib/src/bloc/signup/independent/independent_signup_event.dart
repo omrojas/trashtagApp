@@ -7,22 +7,15 @@ abstract class IndependentSignUpEvent extends Equatable {
 }
 
 class CreateAccountButtonPressed extends IndependentSignUpEvent {
-  final String name;
-  final String email;
-  final String password;
+  final User user;
 
-  CreateAccountButtonPressed({
-    @required this.name,
-    @required this.email,
-    @required this.password,
-  });
+  CreateAccountButtonPressed({@required this.user});
 
   @override
-  List<Object> get props => [name, email, password];
+  List<Object> get props => [user];
 
   @override
-  String toString() =>
-      'CreateAccountButtonPressed { name: $name, email: $email, password: $password }';
+  String toString() => 'CreateAccountButtonPressed { user: $user }';
 }
 
 class LoginButtonPressed extends IndependentSignUpEvent {

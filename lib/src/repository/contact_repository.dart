@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/graphql/graphql_service.dart';
-import 'package:trashtagApp/src/graphql/mutations.dart';
+import 'package:trashtagApp/src/models/user_message.dart';
 
-class ContactRepository {
-  final GraphQLService graphQLService = GraphQLService();
-  final Mutations mutations = Mutations();
+import 'api_respository.dart';
 
-  Future<bool> sendMessage({
-    @required final String subject,
-    @required final String messaje,
-  }) async {
-    try {
-      final query = '';
-      final response = await graphQLService.performMutation(
-        query,
-        variables: {
-          'subject': subject,
-          'messaje': messaje,
-        },
-      );
+class ContactRepository extends ApiRepository {
+  Future<bool> sendMessage({@required final UserMessage message}) async {
+    final response = await graphQLService.performMutation(
+      mutations.userMessage,
+      variables: {
+        'subject': message.subject,
+        'messaje': message.message,
+      },
+    );
 
-      return response.data.saved == true;
-    } catch (e) {
-      return false;
-    }
+    return response.data['createUserMessage']['saved'];
   }
 }

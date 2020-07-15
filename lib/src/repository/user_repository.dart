@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:trashtagApp/src/graphql/graphql_service.dart';
-import 'package:trashtagApp/src/graphql/mutations.dart';
+import 'package:trashtagApp/src/models/user.dart';
 
-class UserRepository {
+import 'api_respository.dart';
+
+class UserRepository extends ApiRepository {
   final FlutterSecureStorage storage = new FlutterSecureStorage();
-  final GraphQLService graphQLService = GraphQLService();
-  final Mutations mutations = Mutations();
 
   Future<String> authenticate({
     @required final String username,
@@ -21,62 +20,54 @@ class UserRepository {
       },
     );
 
-    return result.hasException ? null : result.data["tokenAuth"]['token'];
+    return result.data["tokenAuth"]['token'];
   }
 
   Future<void> deleteToken() async {
-    /// await Future.delayed(Duration(seconds: 1));
     await storage.delete(key: 'token');
     return;
   }
 
   Future<void> persistToken(final String token) async {
-    /// await Future.delayed(Duration(seconds: 1));
     await storage.write(key: 'token', value: token);
     return;
   }
 
   Future<bool> hasToken() async {
-    /// await Future.delayed(Duration(seconds: 1));
     final token = await storage.read(key: 'token');
     return token != null;
   }
 
   Future<bool> createIndividualVolunteer({
-    @required final String fullName,
-    @required final String email,
-    @required final String password,
+    @required final User user,
   }) async {
-    // await Future.delayed(Duration(seconds: 2));
     QueryResult result = await graphQLService.performMutation(
       mutations.createIndividualVolunteer,
       variables: {
-        'fullName': fullName,
-        'email': email,
-        'password': password,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
+        'email': user.email,
+        'password': user.password,
       },
     );
-
-    return result.hasException ? null : result.data[''];
+    return result.data['signUp']['saved'];
   }
 
   Future<bool> createOrganizerVolunteer({
-    @required final String fullName,
-    @required final String email,
-    @required final String password,
+    @required final User user,
     @required final int organizationId,
   }) async {
-    // await Future.delayed(Duration(seconds: 2));
     QueryResult result = await graphQLService.performMutation(
       mutations.createOrganizerVolunteer,
       variables: {
-        'fullName': fullName,
-        'email': email,
-        'password': password,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
+        'email': user.email,
+        'password': user.password,
         'organizationId': organizationId,
       },
     );
 
-    return result.hasException ? null : result.data[''];
+    return result.data['signUp']['saved'];
   }
 }

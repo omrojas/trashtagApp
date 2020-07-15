@@ -9,25 +9,22 @@ abstract class OrganizerSignUpEvent extends Equatable {
 
 class OrganizerSignUpStarted extends OrganizerSignUpEvent {}
 
+class LoadOrganizations extends OrganizerSignUpEvent {}
+
 class CreateAccountButtonPressed extends OrganizerSignUpEvent {
-  final String name;
-  final String email;
+  final User user;
   final int organizationId;
-  final String password;
 
   CreateAccountButtonPressed({
-    @required this.name,
-    @required this.email,
+    @required this.user,
     @required this.organizationId,
-    @required this.password,
   });
 
   @override
-  List<Object> get props => [name, email, organizationId, password];
+  List<Object> get props => [user, organizationId];
 
   @override
-  String toString() =>
-      'CreateAccountButtonPressed { name: $name, email: $email, organization:$organizationId, password: $password }';
+  String toString() => 'CreateAccountButtonPressed';
 }
 
 class LoginButtonPressed extends OrganizerSignUpEvent {

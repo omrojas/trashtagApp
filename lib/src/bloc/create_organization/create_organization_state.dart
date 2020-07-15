@@ -2,6 +2,7 @@ part of 'create_organization_bloc.dart';
 
 abstract class CreateOrganizationState extends Equatable {
   const CreateOrganizationState();
+
   @override
   List<Object> get props => [];
 }

@@ -24,7 +24,10 @@ class OrganizationVolunteerPage extends StatelessWidget {
   Widget _blocProvider() {
     return BlocProvider(
       create: (context) {
-        return OrganizerSignUpBloc(userRepository: userRepository);
+        return OrganizerSignUpBloc(
+          userRepository: userRepository,
+          organizationRepository: organizationRepository,
+        );
       },
       child: BlocBuilder<OrganizerSignUpBloc, OrganizerSignUpState>(
         builder: (context, state) {

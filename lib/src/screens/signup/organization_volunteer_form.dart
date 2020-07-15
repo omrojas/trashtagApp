@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart'
     as authentication_bloc;
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
+import 'package:trashtagApp/src/models/organization.dart';
+import 'package:trashtagApp/src/models/user.dart';
 import 'package:trashtagApp/src/stream_controllers/signup/organization/organization_volunteer.signup_controller.dart';
 
 class OrganizationVolunteerForm extends StatefulWidget {
@@ -15,7 +17,6 @@ class OrganizationVolunteerForm extends StatefulWidget {
 
 class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   final _streamController = OrganizationVolunterSignUpController();
-  List<DropdownMenuItem<int>> _organizations = [];
   bool _passwordVisible = true;
 
   void _changePasswordVisible() {
@@ -23,11 +24,15 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   }
 
   void _onSignUpButtonPresed() {
+    final user = User(
+      firstName: _streamController.firstName,
+      lastName: _streamController.lastName,
+      email: _streamController.email,
+      password: _streamController.password,
+    );
     BlocProvider.of<OrganizerSignUpBloc>(context).add(
       CreateAccountButtonPressed(
-        name: _streamController.name,
-        email: _streamController.email,
-        password: _streamController.password,
+        user: user,
         organizationId: _streamController.organization,
       ),
     );
@@ -74,6 +79,32 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
     );
   }
 
+  void _loadOrganizations() {
+    BlocProvider.of<OrganizerSignUpBloc>(context).add(
+      LoadOrganizations(),
+    );
+  }
+
+  List<DropdownMenuItem> _getOrganizationsDropdownMenuItems(
+    List<Organization> organizations,
+  ) {
+    List<DropdownMenuItem<int>> items = [];
+    organizations.forEach((e) {
+      final item = DropdownMenuItem<int>(
+        value: int.parse('${e.id}'),
+        child: Text('${e.name}'),
+      );
+      items.add(item);
+    });
+    return items;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrganizations();
+  }
+
   @override
   void dispose() {
     _streamController.dispose();
@@ -113,7 +144,9 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
           _createOrganization(),
           _selectOrganization(),
           SizedBox(height: 25),
-          _name(),
+          _firstName(),
+          SizedBox(height: 25),
+          _lastName(),
           SizedBox(height: 25),
           _email(),
           SizedBox(height: 25),
@@ -125,16 +158,31 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
     );
   }
 
-  Widget _name() {
+  Widget _firstName() {
     return StreamBuilder<String>(
-      stream: _streamController.nameStream,
+      stream: _streamController.firstNameStream,
       builder: (context, snapshot) {
         return TextFormField(
           decoration: InputDecoration(
-            hintText: 'Enter your name',
+            hintText: 'Enter your first name',
             errorText: snapshot.error,
           ),
-          onChanged: _streamController.changeName,
+          onChanged: _streamController.changeFirstName,
+        );
+      },
+    );
+  }
+
+  Widget _lastName() {
+    return StreamBuilder<String>(
+      stream: _streamController.lastNameStream,
+      builder: (context, snapshot) {
+        return TextFormField(
+          decoration: InputDecoration(
+            hintText: 'Enter your last name',
+            errorText: snapshot.error,
+          ),
+          onChanged: _streamController.changeLastName,
         );
       },
     );
@@ -168,21 +216,30 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   }
 
   Widget _selectOrganization() {
-    return StreamBuilder<int>(
-      stream: _streamController.organizationStream,
-      builder: (context, snapshot) {
-        return DropdownButton<int>(
-          icon: Icon(Icons.arrow_drop_down),
-          isExpanded: true,
-          iconSize: 35,
-          hint: Text('Select organization'),
-          value: _streamController.organization,
-          items: _organizations,
-          onChanged: (int organization) {
-            _streamController.changeOrganization(organization);
-            setState(() {});
-          },
-        );
+    return BlocBuilder<OrganizerSignUpBloc, OrganizerSignUpState>(
+      builder: (BuildContext context, state) {
+        if (state is OrganizationsLoaded) {
+          return StreamBuilder<int>(
+            stream: _streamController.organizationStream,
+            builder: (context, snapshot) {
+              return DropdownButton<int>(
+                icon: Icon(Icons.arrow_drop_down),
+                isExpanded: true,
+                iconSize: 35,
+                disabledHint: Text('No organizations available.'),
+                hint: Text('Select organization'),
+                value: _streamController.organization,
+                items: _getOrganizationsDropdownMenuItems(state.organizations),
+                onChanged: (int organization) {
+                  setState(() {
+                    _streamController.changeOrganization(organization);
+                  });
+                },
+              );
+            },
+          );
+        }
+        return Text('Loading organizations...');
       },
     );
   }

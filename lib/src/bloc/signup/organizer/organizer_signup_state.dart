@@ -9,6 +9,15 @@ abstract class OrganizerSignUpState extends Equatable {
 
 class OrganizerSignUpInitial extends OrganizerSignUpState {}
 
+class OrganizationsLoaded extends OrganizerSignUpState {
+  final List<Organization> organizations;
+
+  OrganizationsLoaded({@required final this.organizations});
+
+  @override
+  List<Object> get props => [];
+}
+
 class OrganizerSignUpInProgress extends OrganizerSignUpState {}
 
 class OrganizerSignUpSuccess extends OrganizerSignUpState {
