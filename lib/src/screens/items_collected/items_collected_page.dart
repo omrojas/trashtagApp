@@ -1,37 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/widgets/menu.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
-import 'package:trashtagApp/src/widgets/trashtag_app_bar.dart';
 
-class ItemsCollectedPage extends StatefulWidget {
-  ItemsCollectedPage({Key key}) : super(key: key);
-
-  @override
-  _ItemsCollectedPageState createState() => _ItemsCollectedPageState();
-}
-
-class _ItemsCollectedPageState extends State<ItemsCollectedPage> {
+class ItemsCollectedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(context),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: _content(),
-        ),
-      ),
-      bottomNavigationBar: Menu(),
-    );
+    return _content(context);
   }
 
-  Widget _content() {
+  Widget _content(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20.0),
       child: Column(
         children: <Widget>[
           _title(),
           SizedBox(height: 25.0),
-          _items(),
+          _items(context),
         ],
       ),
     );
@@ -45,7 +28,7 @@ class _ItemsCollectedPageState extends State<ItemsCollectedPage> {
     );
   }
 
-  Widget _items() {
+  Widget _items(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

@@ -54,4 +54,28 @@ class Validators {
       }
     },
   );
+
+  final validateSubject = StreamTransformer<String, String>.fromHandlers(
+    handleData: (subject, sink) {
+      if (subject != null) {
+        if (subject.trim().length >= 10) {
+          sink.add(subject);
+        } else {
+          sink.addError('Enter at least 10 characters');
+        }
+      }
+    },
+  );
+
+  final validateMessage = StreamTransformer<String, String>.fromHandlers(
+    handleData: (message, sink) {
+      if (message != null) {
+        if (message.trim().length >= 10) {
+          sink.add(message);
+        } else {
+          sink.addError('Enter at least 10 characters');
+        }
+      }
+    },
+  );
 }

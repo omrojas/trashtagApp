@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:trashtagApp/src/models/user.dart';
 
 import 'api_respository.dart';
 
 class UserRepository extends ApiRepository {
-  final FlutterSecureStorage storage = new FlutterSecureStorage();
-
   Future<String> authenticate({
     @required final String username,
     @required final String password,

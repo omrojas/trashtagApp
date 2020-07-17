@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 
 import 'src/bloc/authentication/authentication_bloc.dart';
 import 'src/bloc/simple_delegate.dart';
@@ -74,7 +75,12 @@ class TrashTagApp extends StatelessWidget {
       return LoginPage(userRepository: userRepository);
     }
     if (state is AuthenticationSuccess) {
-      return HomePage();
+      return BlocProvider(
+        create: (context) {
+          return HomeBloc();
+        },
+        child: HomePage(),
+      );
     }
     if (state is AuthenticationFailure) {
       return LoginPage(userRepository: userRepository);

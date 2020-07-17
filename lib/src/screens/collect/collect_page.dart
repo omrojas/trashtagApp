@@ -1,78 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/screens/collect/add_trash_page.dart';
-import 'package:trashtagApp/src/widgets/menu.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
-import 'package:trashtagApp/src/widgets/trashtag_app_bar.dart';
 
 import 'trash.dart';
 
-class CollectPage extends StatefulWidget {
-  CollectPage({Key key}) : super(key: key);
-
-  @override
-  _CollectPageState createState() => _CollectPageState();
-}
-
-class _CollectPageState extends State<CollectPage> {
+class CollectPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(context),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: _content(),
-        ),
-      ),
-      bottomNavigationBar: Menu(),
-      floatingActionButton: _addTrash(),
-    );
+    return _content(context);
   }
 
-  Widget _addTrash() {
-    return FloatingActionButton(
-      backgroundColor: Theme.of(context).accentColor,
-      child: Icon(
-        Icons.add,
-        color: Colors.white,
-        size: 40.0,
-      ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AddTrahsPage()),
-        );
-      },
-    );
-  }
-
-  Widget _content() {
+  Widget _content(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
           _title(),
           SizedBox(height: 25.0),
-          _trashes(),
+          _grid(context),
         ],
       ),
     );
   }
 
-  Widget _trashes() {
+  Widget _grid(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 1000.0,
+      height: size.height * .7,
+      padding: EdgeInsets.only(bottom: 120.0),
       child: GridView.count(
         crossAxisCount: 2,
-        children: <Widget>[
-          Trash(),
-          Trash(),
-          Trash(),
-          Trash(),
-          Trash(),
-          Trash(),
-        ],
+        children: _trashes(),
       ),
     );
+  }
+
+  List<Widget> _trashes() {
+    List<Widget> list = <Widget>[];
+    list.add(Trash());
+    list.add(Trash());
+    list.add(Trash());
+    list.add(Trash());
+    list.add(Trash());
+    list.add(Trash());
+    return list;
   }
 
   Widget _title() {

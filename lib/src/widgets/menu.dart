@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/screens/collect/collect_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 
-class Menu extends StatefulWidget {
-  Menu({Key key}) : super(key: key);
+class Menu extends StatelessWidget {
+  void _onHomeButtonPressed(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context).add(
+      HomeButtonPressed(),
+    );
+  }
 
-  @override
-  _MenuState createState() => _MenuState();
-}
+  void _onCollectButtonPressed(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context).add(
+      CollectButtonPressed(),
+    );
+  }
 
-class _MenuState extends State<Menu> {
+  void _onListButtonPressed(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context).add(
+      UserListButtonPressed(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10.0),
-      child: _content(),
+      child: _content(context),
     );
   }
 
-  Widget _content() {
+  Widget _content(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
@@ -26,70 +38,72 @@ class _MenuState extends State<Menu> {
           Radius.circular(12.0),
         ),
       ),
-      child: _tems(),
+      child: _tems(context),
     );
   }
 
-  Widget _tems() {
+  Widget _tems(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        _homeButton(),
-        _collectButton(),
-        _yourListButton(),
+        _homeButton(context),
+        _collectButton(context),
+        _yourListButton(context),
       ],
     );
   }
 
-  Widget _homeButton() {
+  Widget _homeButton(BuildContext context) {
     return _menuButton(
+      context: context,
       name: 'Home',
       assetName: 'assets/images/home.png',
       onPresed: () {
-        print('home');
+        _onHomeButtonPressed(context);
       },
     );
   }
 
-  Widget _collectButton() {
+  Widget _collectButton(BuildContext context) {
     return _menuButton(
+      context: context,
       name: 'Collect',
       assetName: 'assets/images/clean-up.png',
       onPresed: () {
-        print('Collect');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CollectPage()),
-        );
+        _onCollectButtonPressed(context);
       },
     );
   }
 
-  Widget _yourListButton() {
+  Widget _yourListButton(BuildContext context) {
     return _menuButton(
+      context: context,
       name: 'Your List',
       assetName: 'assets/images/my-list.png',
       onPresed: () {
-        print('Your List');
+        _onListButtonPressed(context);
       },
     );
   }
 
-  Widget _menuButton(
-      {@required String name,
-      @required String assetName,
-      @required Function onPresed}) {
+  Widget _menuButton({
+    @required BuildContext context,
+    @required String name,
+    @required String assetName,
+    @required Function onPresed,
+  }) {
     return _buttonContainer(
-        child: FlatButton(
-      onPressed: onPresed,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          _buttonIcon(assetName: assetName),
-          _buttonText(text: name),
-        ],
+      child: FlatButton(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _buttonIcon(assetName: assetName),
+            _buttonText(context: context, text: name),
+          ],
+        ),
+        onPressed: onPresed,
       ),
-    ));
+    );
   }
 
   Widget _buttonContainer({@required FlatButton child}) {
@@ -112,7 +126,10 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget _buttonText({@required String text}) {
+  Widget _buttonText({
+    @required BuildContext context,
+    @required String text,
+  }) {
     return Text(
       text,
       style: TextStyle(
