@@ -5,7 +5,7 @@ import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/repository/contact_repository.dart';
 import 'package:trashtagApp/src/screens/collect/collect_page.dart';
 import 'package:trashtagApp/src/screens/contact/contact_page.dart';
-import 'package:trashtagApp/src/screens/home/clean_up.dart';
+import 'package:trashtagApp/src/screens/home/home_option.dart';
 import 'package:trashtagApp/src/screens/items_collected/items_collected_page.dart';
 import 'package:trashtagApp/src/widgets/add_trash.dart';
 import 'package:trashtagApp/src/widgets/menu.dart';
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           SizedBox(height: 40.0),
           _message(),
-          SizedBox(height: 40.0),
+          SizedBox(height: 60.0),
           _options(),
         ],
       ),
@@ -82,6 +82,73 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _options() {
-    return CleanUp();
+    return Container(
+      height: 350.0,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          _cleanUp(),
+          // _trackMyAdventure(),
+          // _reports(),
+          _contact(),
+        ],
+      ),
+    );
+  }
+
+  Widget _cleanUp() {
+    return HomeOption(
+      assetName: 'assets/images/cleanUp.jpeg',
+      title: 'Clean up!',
+      subtitle:
+          'Help us to collect information about littering in public open spaces.',
+      buttonText: 'START CLEANING',
+      onClick: () {
+        BlocProvider.of<HomeBloc>(context).add(
+          CollectButtonPressed(),
+        );
+      },
+    );
+  }
+
+  Widget _trackMyAdventure() {
+    return HomeOption(
+      // TODO change image
+      assetName: 'assets/images/cleanUp.jpeg',
+      title: 'Track my adventure',
+      subtitle: 'Take a look at your progress in making a change.',
+      buttonText: 'SEE MY PROGRESS',
+      onClick: () {
+        // NAVIGATE BY BLOC
+      },
+    );
+  }
+
+  Widget _reports() {
+    return HomeOption(
+      // TODO change image
+      assetName: 'assets/images/cleanUp.jpeg',
+      title: 'Reports',
+      subtitle: 'List all your collected garbage across a cleaning session.',
+      buttonText: 'SEE REPORTS',
+      onClick: () {
+        // NAVIGATE BY BLOC
+      },
+    );
+  }
+
+  Widget _contact() {
+    return HomeOption(
+      // TODO change image
+      assetName: 'assets/images/cleanUp.jpeg',
+      title: 'Contact us',
+      subtitle: 'Get in touch with us.',
+      buttonText: 'CONTACT',
+      onClick: () {
+        BlocProvider.of<HomeBloc>(context).add(
+          ContactButtonPressed(),
+        );
+      },
+    );
   }
 }

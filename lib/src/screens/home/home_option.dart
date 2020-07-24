@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 
-class CleanUp extends StatefulWidget {
-  CleanUp({Key key}) : super(key: key);
+class HomeOption extends StatelessWidget {
+  final String assetName;
+  final String title;
+  final String subtitle;
+  final String buttonText;
+  final Function onClick;
 
-  @override
-  _CleanUpState createState() => _CleanUpState();
-}
+  const HomeOption({
+    Key key,
+    @required this.assetName,
+    @required this.title,
+    @required this.subtitle,
+    @required this.buttonText,
+    @required this.onClick,
+  }) : super(key: key);
 
-class _CleanUpState extends State<CleanUp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350.0,
+      padding: EdgeInsets.only(right: 10.0),
+      width: 360.0,
       child: _content(),
     );
   }
@@ -24,7 +33,7 @@ class _CleanUpState extends State<CleanUp> {
         decoration: BoxDecoration(
           color: Colors.teal[700],
           image: DecorationImage(
-            image: AssetImage('assets/images/cleanUp.jpeg'),
+            image: AssetImage(assetName),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(.5),
@@ -34,8 +43,8 @@ class _CleanUpState extends State<CleanUp> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            SizedBox(height: 120.0),
             _title(),
             SizedBox(height: 20.0),
             _subTitle(),
@@ -49,7 +58,7 @@ class _CleanUpState extends State<CleanUp> {
 
   Widget _title() {
     return Text(
-      'Clean up!',
+      title,
       style: TextStyle(
         color: Colors.white,
         fontSize: 35.0,
@@ -60,7 +69,7 @@ class _CleanUpState extends State<CleanUp> {
 
   Widget _subTitle() {
     return Text(
-      'Help us to collect information about littering in public open spaces.',
+      subtitle,
       style: TextStyle(
         color: Colors.white,
         fontSize: 20.0,
@@ -74,10 +83,10 @@ class _CleanUpState extends State<CleanUp> {
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Text(
-        'START CLEANING',
+        buttonText,
         style: TextStyle(color: Colors.white, fontSize: 18.0),
       ),
-      onPressed: () => {},
+      onPressed: onClick,
     );
   }
 }
