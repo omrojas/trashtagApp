@@ -2,15 +2,21 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:trashtagApp/src/models/user_information.dart';
+import 'package:trashtagApp/src/repository/user_repository.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super();
+  final UserRepository userRepository;
+  HomeBloc({@required this.userRepository})
+      : assert(userRepository != null),
+        super();
 
   @override
-  HomeState get initialState => HomeView();
+  HomeState get initialState => HomeInitial();
 
   @override
   Stream<HomeState> mapEventToState(
@@ -21,7 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
 
     if (event is HomeButtonPressed) {
-      yield HomeView();
+      final user = await userRepository.getUserInformation();
+      yield HomeView(userInformation: user);
     }
 
     if (event is CollectButtonPressed) {

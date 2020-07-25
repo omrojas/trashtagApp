@@ -22,6 +22,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    _onHomeButtonPressed();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
@@ -74,10 +80,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _message() {
-    final name = 'Natasha';
-    return PageTitle(
-      title: 'Hello, $name!',
-      subTitle: 'Select an option to continue.',
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        if (state is HomeView) {
+          final user = state?.userInformation?.firstName ?? '';
+          return PageTitle(
+            title: 'Hello, $user!',
+            subTitle: 'Select an option to continue.',
+          );
+        }
+
+        return CircularProgressIndicator();
+      },
     );
   }
 
@@ -149,6 +163,12 @@ class _HomePageState extends State<HomePage> {
           ContactButtonPressed(),
         );
       },
+    );
+  }
+
+  _onHomeButtonPressed() {
+    BlocProvider.of<HomeBloc>(context).add(
+      HomeButtonPressed(),
     );
   }
 }

@@ -16,4 +16,13 @@ class Queries {
       }
     }
   ''';
+
+  final getUserInformation = '''
+    {
+      userInformation {
+        firstName
+        lastName
+      }
+    }
+  ''';
 }
