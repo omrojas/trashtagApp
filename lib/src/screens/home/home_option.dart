@@ -39,7 +39,7 @@ class HomeOption extends StatelessWidget {
             SizedBox(height: 20.0),
             _subTitle(),
             SizedBox(height: 20.0),
-            _startCleanigButton(),
+            _button(),
           ],
         ),
       ),
@@ -67,7 +67,7 @@ class HomeOption extends StatelessWidget {
     );
   }
 
-  Widget _startCleanigButton() {
+  Widget _button() {
     return RaisedButton(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
