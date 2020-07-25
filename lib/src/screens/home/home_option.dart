@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trashtagApp/src/widgets/opacity_image.dart';
 
 class HomeOption extends StatelessWidget {
   final String assetName;
@@ -28,19 +29,8 @@ class HomeOption extends StatelessWidget {
   Widget _content() {
     return Card(
       elevation: 4.0,
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        decoration: BoxDecoration(
-          color: Colors.teal[700],
-          image: DecorationImage(
-            image: AssetImage(assetName),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(.5),
-              BlendMode.dstATop,
-            ),
-          ),
-        ),
+      child: OpacityImage(
+        assetName: assetName,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.end,

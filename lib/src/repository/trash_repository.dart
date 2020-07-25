@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:trashtagApp/src/models/trash.dart';
 
@@ -23,11 +21,7 @@ class TrashRepository extends ApiRepository {
   }
 
   List<Trash> _parseTrahes(response) {
-    final parsed = json.decode(response.data);
-    final trashes = parsed['allTrashes'] as List;
-    if (trashes == null) {
-      return [];
-    }
+    final trashes = response.data['allTrashes'] as List;
     return trashes.map((i) => Trash.fromJson(i)).toList();
   }
 }
