@@ -1,18 +1,22 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class GraphQLService {
+  final storage = new FlutterSecureStorage();
   final String url = 'https://api-trashtag.herokuapp.com/graphql/';
-  final String token;
+
   GraphQLClient _client;
 
-  GraphQLService(this.token) {
+  GraphQLService() {
     final HttpLink httpLink = HttpLink(uri: url);
-    final AuthLink authLink = AuthLink(getToken: () => 'JWT $token');
+    final AuthLink authLink = AuthLink(getToken: () async {
+      final token = await storage.read(key: 'token');
+      return 'JWT $token';
+    });
 
     _client = GraphQLClient(
-      link: token != null ? authLink.concat(httpLink) : httpLink,
+      link: authLink.concat(httpLink),
       cache: InMemoryCache(),
-      // cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
     );
   }
 
