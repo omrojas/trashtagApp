@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
 import 'package:trashtagApp/src/screens/login/login_form.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/auth_repository.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class LoginPage extends StatelessWidget {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
 
-  LoginPage({Key key, @required this.userRepository})
-      : assert(userRepository != null),
+  LoginPage({Key key, @required this.authRepository})
+      : assert(authRepository != null),
         super(key: key);
 
   _onSignUpButtonPressed(context) {
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
       create: (context) {
         return LoginBloc(
           authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
-          userRepository: userRepository,
+          authRepository: authRepository,
         );
       },
       child: LoginForm(),

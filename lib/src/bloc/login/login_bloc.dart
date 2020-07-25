@@ -4,19 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/auth_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
   final AuthenticationBloc authenticationBloc;
 
   LoginBloc({
-    @required this.userRepository,
+    @required this.authRepository,
     @required this.authenticationBloc,
-  })  : assert(userRepository != null),
+  })  : assert(authRepository != null),
         assert(authenticationBloc != null);
 
   LoginState get initialState => LoginInitial();
@@ -27,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginInProgress();
 
       try {
-        final token = await userRepository.authenticate(
+        final token = await authRepository.authenticate(
           username: event.username,
           password: event.password,
         );

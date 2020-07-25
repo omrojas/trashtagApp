@@ -6,20 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/models/user.dart';
 import 'package:trashtagApp/src/repository/organization_repository.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/auth_repository.dart';
 
 part 'organizer_signup_event.dart';
 part 'organizer_signup_state.dart';
 
 class OrganizerSignUpBloc
     extends Bloc<OrganizerSignUpEvent, OrganizerSignUpState> {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
   final OrganizationRepository organizationRepository;
 
   OrganizerSignUpBloc({
-    @required final this.userRepository,
+    @required final this.authRepository,
     @required final this.organizationRepository,
-  }) : assert(userRepository != null, organizationRepository != null);
+  }) : assert(authRepository != null, organizationRepository != null);
 
   @override
   OrganizerSignUpState get initialState => OrganizerSignUpInitial();
@@ -48,7 +48,7 @@ class OrganizerSignUpBloc
       try {
         yield OrganizerSignUpInProgress();
 
-        final response = await userRepository.createOrganizerVolunteer(
+        final response = await authRepository.createOrganizerVolunteer(
           user: event.user,
           organizationId: event.organizationId,
         );

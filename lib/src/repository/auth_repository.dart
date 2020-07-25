@@ -4,7 +4,7 @@ import 'package:trashtagApp/src/models/user.dart';
 
 import 'api_respository.dart';
 
-class UserRepository extends ApiRepository {
+class AuthRepository extends ApiRepository {
   Future<String> authenticate({
     @required final String username,
     @required final String password,

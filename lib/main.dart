@@ -4,7 +4,7 @@ import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 
 import 'src/bloc/authentication/authentication_bloc.dart';
 import 'src/bloc/simple_delegate.dart';
-import 'src/repository/user_repository.dart';
+import 'src/repository/auth_repository.dart';
 import 'src/screens/home/home_page.dart';
 import 'src/screens/login/login_page.dart';
 import 'src/screens/signup/independent_volunteer_page.dart';
@@ -15,25 +15,25 @@ import 'src/widgets/loading_indicator.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = SimpleBlocDelegate();
-  final userRepository = UserRepository();
+  final authRepository = AuthRepository();
 
   runApp(
     BlocProvider<AuthenticationBloc>(
       create: (context) {
-        return AuthenticationBloc(userRepository: userRepository)
+        return AuthenticationBloc(authRepository: authRepository)
           ..add(AuthenticationStarted());
       },
       child: TrashTagApp(
-        userRepository: userRepository,
+        authRepository: authRepository,
       ),
     ),
   );
 }
 
 class TrashTagApp extends StatelessWidget {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
 
-  TrashTagApp({Key key, @required this.userRepository}) : super(key: key);
+  TrashTagApp({Key key, @required this.authRepository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class TrashTagApp extends StatelessWidget {
       return SplashScreen();
     }
     if (state is Unauthentication) {
-      return LoginPage(userRepository: userRepository);
+      return LoginPage(authRepository: authRepository);
     }
     if (state is AuthenticationSuccess) {
       return BlocProvider(
@@ -83,16 +83,16 @@ class TrashTagApp extends StatelessWidget {
       );
     }
     if (state is AuthenticationFailure) {
-      return LoginPage(userRepository: userRepository);
+      return LoginPage(authRepository: authRepository);
     }
     if (state is AuthenticationInProgress) {
       return LoadingIndicator();
     }
     if (state is SignUpAsIndependentVolunteer) {
-      return IndependentVolunteerPage(userRepository: userRepository);
+      return IndependentVolunteerPage(authRepository: authRepository);
     }
     if (state is SignUpAsOrganizationVolunteer) {
-      return OrganizationVolunteerPage(userRepository: userRepository);
+      return OrganizationVolunteerPage(authRepository: authRepository);
     }
     return SplashScreen();
   }

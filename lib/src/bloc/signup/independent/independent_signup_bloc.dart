@@ -4,18 +4,18 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:trashtagApp/src/models/user.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/auth_repository.dart';
 
 part 'independent_signup_event.dart';
 part 'independent_signup_state.dart';
 
 class IndependentSignUpBloc
     extends Bloc<IndependentSignUpEvent, IndependentSignUpState> {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
 
   IndependentSignUpBloc({
-    @required this.userRepository,
-  }) : assert(userRepository != null);
+    @required this.authRepository,
+  }) : assert(authRepository != null);
 
   @override
   IndependentSignUpState get initialState => IndependentSignUpInitial();
@@ -30,7 +30,7 @@ class IndependentSignUpBloc
         yield IndependentSignUpInProgress();
 
         final response =
-            await userRepository.createIndividualVolunteer(user: event.user);
+            await authRepository.createIndividualVolunteer(user: event.user);
 
         if (response == true) {
           yield IndependentSignUpSuccess(message: 'User successfully created');

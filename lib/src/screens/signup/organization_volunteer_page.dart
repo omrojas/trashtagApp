@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
 import 'package:trashtagApp/src/repository/organization_repository.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/auth_repository.dart';
 import 'package:trashtagApp/src/screens/organization/create_organization_page.dart';
 import 'package:trashtagApp/src/screens/signup/organization_volunteer_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class OrganizationVolunteerPage extends StatelessWidget {
-  final UserRepository userRepository;
+  final AuthRepository authRepository;
   final organizationRepository = OrganizationRepository();
 
-  OrganizationVolunteerPage({Key key, @required this.userRepository})
-      : assert(userRepository != null),
+  OrganizationVolunteerPage({Key key, @required this.authRepository})
+      : assert(authRepository != null),
         super(key: key);
 
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class OrganizationVolunteerPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         return OrganizerSignUpBloc(
-          userRepository: userRepository,
+          authRepository: authRepository,
           organizationRepository: organizationRepository,
         );
       },
