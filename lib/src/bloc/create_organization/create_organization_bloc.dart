@@ -31,7 +31,7 @@ class CreateOrganizationBloc
         final response = await repository.createOrganizations(
           organization: organization,
         );
-        print('Response: $response');
+
         if (response == false) {
           throw ('');
         }

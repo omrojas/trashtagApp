@@ -22,7 +22,6 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    print('event $event');
     if (event is LoginButtonPressed) {
       yield Unauthentication();
     }

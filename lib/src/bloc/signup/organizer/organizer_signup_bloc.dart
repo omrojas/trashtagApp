@@ -37,7 +37,6 @@ class OrganizerSignUpBloc
         final organizations = await organizationRepository.getOrganizations();
         yield OrganizationsLoaded(organizations: organizations);
       } catch (e) {
-        print('error: $e');
         yield OrganizationsLoaded(organizations: []);
       }
     }
