@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
-import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 
 class TrashTagDrawer extends StatelessWidget {
   const TrashTagDrawer({Key key}) : super(key: key);
-
-  void _onContactButtonPressed(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context).add(
-      ContactButtonPressed(),
-    );
-  }
 
   void _onLogOut(BuildContext context) {
     BlocProvider.of<AuthenticationBloc>(context).add(
@@ -32,12 +25,8 @@ class TrashTagDrawer extends StatelessWidget {
             SizedBox(height: 40.0),
             _option(
               context: context,
-              text: 'Contact',
-              onPresed: () => _onContactButtonPressed(context),
-            ),
-            _option(
-              context: context,
               text: 'Log out',
+              icon: Icons.exit_to_app,
               onPresed: () => _onLogOut(context),
             ),
           ],
@@ -49,9 +38,14 @@ class TrashTagDrawer extends StatelessWidget {
   Widget _option({
     @required BuildContext context,
     @required final String text,
-    @required Function onPresed,
+    @required final IconData icon,
+    @required final Function onPresed,
   }) {
     return ListTile(
+      leading: Icon(
+        icon,
+        color: Colors.white,
+      ),
       title: Text(
         '$text',
         style: TextStyle(color: Colors.white),
