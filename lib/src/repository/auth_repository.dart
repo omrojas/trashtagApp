@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trashtagApp/src/models/user.dart';
 
 import 'api_respository.dart';
 
 class AuthRepository extends ApiRepository {
+  AuthRepository() : super(authorization: false);
+
   Future<String> authenticate({
     @required final String username,
     @required final String password,
@@ -22,6 +25,7 @@ class AuthRepository extends ApiRepository {
 
   Future<void> deleteToken() async {
     await storage.delete(key: 'token');
+    _deleteUserInformation();
     return;
   }
 
@@ -66,5 +70,12 @@ class AuthRepository extends ApiRepository {
     );
 
     return result.data['signUp']['saved'];
+  }
+
+  void _deleteUserInformation() async {
+    try {
+      final preferences = await SharedPreferences.getInstance();
+      preferences.remove('userInformation');
+    } catch (e) {}
   }
 }

@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/models/organization.dart';
 import 'api_respository.dart';
 
 class OrganizationRepository extends ApiRepository {
+  OrganizationRepository() : super(authorization: false);
   Future<List<Organization>> getOrganizations() async {
     QueryResult response = await graphQLService.performQuery(
       queries.getOrganizations,
