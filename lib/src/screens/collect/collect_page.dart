@@ -74,7 +74,7 @@ class _CollectPageState extends State<CollectPage> {
     );
   }
 
-  _loadTrashes() {
+  void _loadTrashes() {
     BlocProvider.of<CollectBloc>(context).add(
       LoadTrashes(),
     );
