@@ -38,7 +38,7 @@ class IndependentSignUpBloc
 
         yield IndependentSignUpFailure(error: errorMessage);
       } catch (e) {
-        yield IndependentSignUpFailure(error: e.toString());
+        yield IndependentSignUpFailure(error: errorMessage);
       }
     }
   }
