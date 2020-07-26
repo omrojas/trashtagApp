@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
 import 'package:trashtagApp/src/stream_controllers/login/login_stream_controller.dart';
+import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -105,26 +106,10 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Widget _loginButton(LoginState state) {
-    return StreamBuilder<bool>(
+    return TrashTagButton(
+      text: 'GO TO MY DASHBOARD',
       stream: _streamController.validFormStream,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Container(
-          width: double.infinity,
-          child: RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 12.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Text(
-              'GO TO MY DASHBOARD',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
-            ),
-            onPressed: (state is! LoginInProgress && snapshot.hasData)
-                ? _onLoginButtonPressed
-                : null,
-          ),
-        );
-      },
+      function: state is! LoginInProgress ? _onLoginButtonPressed : null,
     );
   }
 

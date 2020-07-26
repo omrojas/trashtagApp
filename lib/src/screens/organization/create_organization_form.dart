@@ -4,6 +4,7 @@ import 'package:trashtagApp/src/bloc/create_organization/create_organization_blo
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
 import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/stream_controllers/organization/create_organization_controller.dart';
+import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
 class CreateOrganizationForm extends StatefulWidget {
   CreateOrganizationForm({Key key}) : super(key: key);
@@ -293,26 +294,10 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   }
 
   Widget _createOrganizationButton(CreateOrganizationState state) {
-    return StreamBuilder<bool>(
+    return TrashTagButton(
+      text: 'SUBMIT ORGANIZATION',
       stream: _streamController.validFormStream,
-      builder: (context, snapshot) {
-        return Container(
-          width: double.infinity,
-          child: RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 12.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Text(
-              'SUBMIT ORGANIZATION',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
-            ),
-            onPressed: (state is! SubmitInProgress && snapshot.hasData)
-                ? _onSubmitButtonPressed
-                : null,
-          ),
-        );
-      },
+      function: state is! SubmitInProgress ? _onSubmitButtonPressed : null,
     );
   }
 

@@ -5,7 +5,6 @@ class TrashTagButton extends StatelessWidget {
   final Function function;
   final String text;
 
-  // TODO Implement it in all forms
   const TrashTagButton({
     Key key,
     @required this.stream,
@@ -20,7 +19,7 @@ class TrashTagButton extends StatelessWidget {
   }
 
   Widget _button(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<bool>(
       stream: stream,
       builder: (context, snapshot) {
         return Container(

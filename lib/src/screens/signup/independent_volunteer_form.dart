@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart'
 import 'package:trashtagApp/src/bloc/signup/independent/independent_signup_bloc.dart';
 import 'package:trashtagApp/src/models/user.dart';
 import 'package:trashtagApp/src/stream_controllers/signup/signup_controller.dart';
+import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
 class IdependentVolunteerForm extends StatefulWidget {
   IdependentVolunteerForm({Key key}) : super(key: key);
@@ -188,27 +189,11 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
   }
 
   Widget _createAccountButton(IndependentSignUpState state) {
-    return StreamBuilder<bool>(
+    return TrashTagButton(
+      text: 'CREATE YOUR ACCOUNT',
       stream: _streamController.validFormStream,
-      builder: (context, snapshot) {
-        return Container(
-          width: double.infinity,
-          child: RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 12.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Text(
-              'CREATE YOUR ACCOUNT',
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
-            ),
-            onPressed:
-                (state is! IndependentSignUpInProgress && snapshot.hasData)
-                    ? _onSignUpButtonPresed
-                    : null,
-          ),
-        );
-      },
+      function:
+          state is! IndependentSignUpInProgress ? _onSignUpButtonPresed : null,
     );
   }
 

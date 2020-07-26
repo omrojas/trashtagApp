@@ -6,6 +6,7 @@ import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart
 import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/models/user.dart';
 import 'package:trashtagApp/src/stream_controllers/signup/organization/organization_volunteer.signup_controller.dart';
+import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
 class OrganizationVolunteerForm extends StatefulWidget {
   const OrganizationVolunteerForm({Key key}) : super(key: key);
@@ -130,14 +131,14 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   Widget _content(OrganizerSignUpState state) {
     return Column(
       children: <Widget>[
-        _form(),
+        _form(state),
         SizedBox(height: 10),
         _message(),
       ],
     );
   }
 
-  Widget _form() {
+  Widget _form(OrganizerSignUpState state) {
     return Form(
       child: Column(
         children: <Widget>[
@@ -152,7 +153,7 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
           SizedBox(height: 25),
           _password(),
           SizedBox(height: 40),
-          _createAccountButton(),
+          _createAccountButton(state),
         ],
       ),
     );
@@ -266,28 +267,12 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
     );
   }
 
-  Widget _createAccountButton() {
-    return StreamBuilder<bool>(
+  Widget _createAccountButton(OrganizerSignUpState state) {
+    return TrashTagButton(
+      text: 'CREATE YOUR ACCOUNT',
       stream: _streamController.validFormStream,
-      builder: (context, snapshot) {
-        return Container(
-          width: double.infinity,
-          child: RaisedButton(
-            padding: EdgeInsets.symmetric(vertical: 12.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            child: Text(
-              'CREATE YOUR ACCOUNT',
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Colors.white,
-              ),
-            ),
-            onPressed: snapshot.hasData ? _onSignUpButtonPresed : null,
-          ),
-        );
-      },
+      function:
+          state is! OrganizerSignUpInProgress ? _onSignUpButtonPresed : null,
     );
   }
 
