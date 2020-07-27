@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
-import 'package:trashtagApp/src/models/trash.dart';
+import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
 import 'trash_widget.dart';
@@ -51,7 +51,7 @@ class _CollectPageState extends State<CollectPage> {
     );
   }
 
-  Widget _trashesGrid(final List<Trash> trashes) {
+  Widget _trashesGrid(final List<SelectedTrash> trashes) {
     final size = MediaQuery.of(context).size;
     return Container(
       height: size.height * .7,
@@ -63,8 +63,8 @@ class _CollectPageState extends State<CollectPage> {
     );
   }
 
-  List<Widget> _trashes(List<Trash> trashes) {
-    return trashes.map((e) => TrashWidget(trash: e)).toList();
+  List<Widget> _trashes(List<SelectedTrash> trashes) {
+    return trashes.map((e) => TrashWidget(selectedTrash: e)).toList();
   }
 
   Widget _title() {

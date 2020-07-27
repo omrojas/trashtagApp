@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:trashtagApp/src/models/trash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
+import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/widgets/opacity_image.dart';
 
-class TrashWidget extends StatelessWidget {
-  final Trash trash;
-  const TrashWidget({Key key, @required final this.trash}) : super(key: key);
+class TrashWidget extends StatefulWidget {
+  final SelectedTrash selectedTrash;
 
+  const TrashWidget({Key key, @required final this.selectedTrash})
+      : super(key: key);
+
+  @override
+  _TrashWidgetState createState() => _TrashWidgetState();
+}
+
+class _TrashWidgetState extends State<TrashWidget> {
   @override
   Widget build(BuildContext context) {
     return _trash(context);
@@ -32,15 +41,29 @@ class TrashWidget extends StatelessWidget {
   }
 
   Widget _image() {
-    if (trash != null && trash.imageUrl != null) {
-      return FadeInImage(
-        image: NetworkImage(trash?.imageUrl),
-        placeholder: AssetImage('assets/images/cleanUp.jpeg'),
+    return Stack(
+      children: <Widget>[
+        _getTrashImage(),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.teal[700].withOpacity(0.4),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getTrashImage() {
+    if (widget.selectedTrash?.trash?.imageUrl != null) {
+      return FadeInImage.assetNetwork(
+        placeholder: 'assets/images/cleanUp.jpeg',
+        image: widget.selectedTrash?.trash?.imageUrl,
         height: 300.0,
         width: double.infinity,
         fit: BoxFit.cover,
       );
     } else {
+      // TODO ASK FOR ANOTHER IMAGE OR SET NO-IMAGE
       return OpacityImage(assetName: 'assets/images/cleanUp.jpeg');
     }
   }
@@ -49,9 +72,9 @@ class TrashWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Text(
-        '23',
+        '${widget.selectedTrash?.quantity ?? 0}',
         style: TextStyle(
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).accentColor,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
@@ -62,7 +85,7 @@ class TrashWidget extends StatelessWidget {
   Widget _name() {
     return ListTile(
       title: Text(
-        '${trash?.name ?? ''}',
+        '${widget.selectedTrash?.trash?.name ?? ''}',
         style: TextStyle(
           color: Colors.white,
           fontSize: 18.0,
@@ -79,16 +102,12 @@ class TrashWidget extends StatelessWidget {
         _actionButton(
           context: context,
           icon: Icons.remove,
-          onClick: () {
-            print('remove');
-          },
+          onClick: () => _onDecrement(context),
         ),
         _actionButton(
           context: context,
           icon: Icons.add,
-          onClick: () {
-            print('add');
-          },
+          onClick: () => _onIncrement(context),
         ),
       ],
     );
@@ -114,5 +133,19 @@ class TrashWidget extends StatelessWidget {
         onPressed: onClick,
       ),
     );
+  }
+
+  void _onIncrement(BuildContext context) {
+    BlocProvider.of<CollectBloc>(context).add(
+      IncrementTrash(widget.selectedTrash?.trash),
+    );
+    setState(() {});
+  }
+
+  void _onDecrement(BuildContext context) {
+    BlocProvider.of<CollectBloc>(context).add(
+      DecrementTrash(widget.selectedTrash?.trash),
+    );
+    setState(() {});
   }
 }

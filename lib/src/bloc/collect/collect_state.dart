@@ -12,7 +12,7 @@ class CollectInitial extends CollectState {}
 class LoadingTrashes extends CollectState {}
 
 class LoadTrashesSuccess extends CollectState {
-  final List<Trash> trashes;
+  final List<SelectedTrash> trashes;
 
   LoadTrashesSuccess({@required this.trashes});
 
