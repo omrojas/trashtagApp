@@ -11,6 +11,7 @@ class Queries {
   final getTrash = '''
     {
       allTrashes {
+        id
         name
         imageUrl
       }
