@@ -91,7 +91,11 @@ class OrganizationVolunteerPage extends StatelessWidget {
         FlatButton(
           child: Text(
             "Log in",
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Theme.of(context).primaryColor,
+              decoration: TextDecoration.underline,
+            ),
           ),
           onPressed: () => _onLoginButtonPressed(context),
         )

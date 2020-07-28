@@ -81,7 +81,11 @@ class LoginPage extends StatelessWidget {
         FlatButton(
           child: Text(
             "Sign up",
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Theme.of(context).primaryColor,
+              decoration: TextDecoration.underline,
+            ),
           ),
           onPressed: () {
             return _onSignUpButtonPressed(context);
