@@ -277,6 +277,6 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
   }
 
   Widget _message() {
-    return Text('By creating an account, you agree to our ...');
+    return Text('By creating an account, you agree to our Terms.');
   }
 }
