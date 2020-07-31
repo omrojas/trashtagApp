@@ -25,9 +25,13 @@ class CollectBloc extends Bloc<CollectEvent, CollectState> {
   Stream<CollectState> mapEventToState(
     CollectEvent event,
   ) async* {
-    if (event is LoadTrashes) {
+    if (event is ResetCounters) {
+      _selectedTrashes.clear();
+    }
+
+    if (event is LoadTrashes || event is ResetCounters) {
       yield LoadingTrashes();
-      final errorMessage = 'Error loading garbage categories';
+      final String errorMessage = 'Error loading garbage categories';
       try {
         await _loadTrashes();
         yield LoadTrashesSuccess(trashes: _selectedTrashes.values.toList());

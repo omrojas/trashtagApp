@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
+import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
@@ -81,6 +82,12 @@ class _CollectPageState extends State<CollectPage> {
   }
 
   void _listener(BuildContext contex, CollectState state) {
+    if (state is LoadTrashesSuccess) {
+      BlocProvider.of<GarbageListBloc>(context).add(
+        SetGarbageList(trashes: state.trashes),
+      );
+    }
+
     if (state is LoadTrashesFailure) {
       Scaffold.of(context).showSnackBar(
         SnackBar(

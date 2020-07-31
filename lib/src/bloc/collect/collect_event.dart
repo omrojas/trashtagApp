@@ -26,3 +26,5 @@ class DecrementTrash extends CollectEvent {
   @override
   List<Object> get props => [trash];
 }
+
+class ResetCounters extends CollectEvent {}

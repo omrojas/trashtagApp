@@ -56,16 +56,14 @@ class _TrashWidgetState extends State<TrashWidget> {
   Widget _getTrashImage() {
     if (widget.selectedTrash?.trash?.imageUrl != null) {
       return FadeInImage.assetNetwork(
-        placeholder: 'assets/images/cleanUp.jpeg',
+        placeholder: 'assets/images/no-image.png',
         image: widget.selectedTrash?.trash?.imageUrl,
         height: 300.0,
         width: double.infinity,
         fit: BoxFit.cover,
       );
-    } else {
-      // TODO ASK FOR ANOTHER IMAGE OR SET NO-IMAGE
-      return OpacityImage(assetName: 'assets/images/cleanUp.jpeg');
     }
+    return OpacityImage(assetName: 'assets/images/no-image.png');
   }
 
   Widget _counter(BuildContext context) {
@@ -74,7 +72,7 @@ class _TrashWidgetState extends State<TrashWidget> {
       child: Text(
         '${widget.selectedTrash?.quantity ?? 0}',
         style: TextStyle(
-          color: Theme.of(context).accentColor,
+          color: Colors.white,
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
@@ -127,7 +125,7 @@ class _TrashWidgetState extends State<TrashWidget> {
       child: IconButton(
         icon: Icon(
           icon,
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           size: 30.0,
         ),
         onPressed: onClick,

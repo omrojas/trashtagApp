@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
 import 'package:trashtagApp/src/bloc/contact/contact_bloc.dart';
+import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/repository/contact_repository.dart';
 import 'package:trashtagApp/src/repository/trash_repository.dart';
@@ -43,12 +44,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _createProdivers() {
+    final trashRepository = TrashRepository();
     return BlocProvider(
       create: (context) {
-        final trashRepository = TrashRepository();
         return CollectBloc(repository: trashRepository);
       },
-      child: _blocBuilder(),
+      child: BlocProvider(
+        create: (context) {
+          return GarbageListBloc(repository: trashRepository);
+        },
+        child: _blocBuilder(),
+      ),
     );
   }
 

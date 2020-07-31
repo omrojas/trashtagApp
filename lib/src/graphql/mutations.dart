@@ -41,4 +41,7 @@ class Mutations {
 
   final String createTrash = '''
   ''';
+
+  final String submitCollect = '''
+  ''';
 }
