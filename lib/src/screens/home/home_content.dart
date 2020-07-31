@@ -45,8 +45,8 @@ class HomeContent extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _cleanUp(context),
-          // _trackMyAdventure(),
-          // _reports(),
+          //_trackMyAdventure(),
+          //_reports(),
           _contact(context),
         ],
       ),
@@ -70,34 +70,31 @@ class HomeContent extends StatelessWidget {
 
   Widget _trackMyAdventure() {
     return HomeOption(
-      // TODO change image
-      assetName: 'assets/images/cleanUp.jpeg',
+      assetName: 'assets/images/track-my-progress.jpeg',
       title: 'Track my adventure',
       subtitle: 'Take a look at your progress in making a change.',
       buttonText: 'SEE MY PROGRESS',
       onClick: () {
-        // NAVIGATE BY BLOC
+        // TODO NAVIGATE BY BLOC
       },
     );
   }
 
   Widget _reports() {
     return HomeOption(
-      // TODO change image
-      assetName: 'assets/images/cleanUp.jpeg',
+      assetName: 'assets/images/reports.jpeg',
       title: 'Reports',
       subtitle: 'List all your collected garbage across a cleaning session.',
       buttonText: 'SEE REPORTS',
       onClick: () {
-        // NAVIGATE BY BLOC
+        // TODO NAVIGATE BY BLOC
       },
     );
   }
 
   Widget _contact(BuildContext context) {
     return HomeOption(
-      // TODO change image
-      assetName: 'assets/images/cleanUp.jpeg',
+      assetName: 'assets/images/contact-us.jpeg',
       title: 'Contact us',
       subtitle: 'Get in touch with us.',
       buttonText: 'CONTACT',

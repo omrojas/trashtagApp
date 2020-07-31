@@ -68,7 +68,7 @@ class Menu extends StatelessWidget {
     return _menuButton(
       context: context,
       name: 'Collect',
-      assetName: 'assets/images/clean-up.png',
+      assetName: 'assets/images/collect.png',
       onPresed: () {
         _onCollectButtonPressed(context);
       },
