@@ -43,5 +43,10 @@ class Mutations {
   ''';
 
   final String submitCollect = '''
+    mutation cleanup(\$trashes: [TrashQuantity]!) {
+      cleanup(trashes: \$trashes) {
+        saved
+      }
+    }
   ''';
 }

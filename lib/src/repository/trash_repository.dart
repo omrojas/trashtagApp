@@ -22,14 +22,20 @@ class TrashRepository extends ApiRepository {
   }
 
   Future<bool> submitCollect({
-    @required final List<SelectedTrash> trashes,
+    @required final List<SelectedTrash> selectedTrashes,
   }) async {
+    final trashes = selectedTrashes
+        .map((e) => {'trashId': e.trash.id, 'quantity': e.quantity})
+        .toList();
+
     final response = await graphQLService.performMutation(
       mutations.submitCollect,
+      variables: {
+        'trashes': trashes,
+      },
     );
-    // TODO CORRECT DATA
-    // return response.data['createTrash']['saved'];
-    return true;
+
+    return response.data['cleanup']['saved'];
   }
 
   List<Trash> _parseTrahes(response) {

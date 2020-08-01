@@ -33,7 +33,9 @@ class GarbageListBloc extends Bloc<GarbageListEvent, GarbageListState> {
       final errorMessage = 'We had a problem trying to save your items.';
 
       try {
-        final status = await repository.submitCollect(trashes: _trashes);
+        final status = await repository.submitCollect(
+          selectedTrashes: _trashes,
+        );
         if (status) {
           final succesfulMessage =
               'Your list has been submitted for approvall. We will check your work in order to create an official TrashTag report with it';
