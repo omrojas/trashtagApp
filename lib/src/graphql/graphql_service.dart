@@ -18,9 +18,18 @@ class GraphQLService {
           })
         : null;
 
+    final policies = Policies(
+      fetch: FetchPolicy.networkOnly,
+    );
+
     _client = GraphQLClient(
       link: authorization ? authLink.concat(httpLink) : httpLink,
       cache: InMemoryCache(),
+      defaultPolicies: DefaultPolicies(
+        watchQuery: policies,
+        query: policies,
+        mutate: policies,
+      ),
     );
   }
 
