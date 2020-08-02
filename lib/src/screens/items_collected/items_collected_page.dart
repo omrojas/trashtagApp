@@ -12,7 +12,7 @@ class ItemsCollectedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(10.0),
         child: _garbageBuilder(context),
       ),
     );
