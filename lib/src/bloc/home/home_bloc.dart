@@ -38,5 +38,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is UserListButtonPressed) {
       yield UserListView();
     }
+
+    if (event is TrackMyAdventureButtonPressed) {
+      final user = await userRepository.getUserInformation();
+      yield TrackMyAdventure(userInformation: user);
+    }
   }
 }

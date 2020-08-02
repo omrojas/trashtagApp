@@ -4,12 +4,15 @@ import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
 import 'package:trashtagApp/src/bloc/contact/contact_bloc.dart';
 import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
+import 'package:trashtagApp/src/bloc/my-progress/my_progress_bloc.dart';
 import 'package:trashtagApp/src/repository/contact_repository.dart';
 import 'package:trashtagApp/src/repository/trash_repository.dart';
+import 'package:trashtagApp/src/repository/user_repository.dart';
 import 'package:trashtagApp/src/screens/collect/collect_page.dart';
 import 'package:trashtagApp/src/screens/contact/contact_page.dart';
 import 'package:trashtagApp/src/screens/home/home_content.dart';
 import 'package:trashtagApp/src/screens/items_collected/items_collected_page.dart';
+import 'package:trashtagApp/src/screens/track_my_adventure/track_my_adventure.dart';
 import 'package:trashtagApp/src/widgets/menu.dart';
 import 'package:trashtagApp/src/widgets/trashtag_app_bar.dart';
 import 'package:trashtagApp/src/widgets/trashtag_drawer.dart';
@@ -45,16 +48,21 @@ class _HomePageState extends State<HomePage> {
 
   Widget _createProdivers() {
     final trashRepository = TrashRepository();
-    return BlocProvider(
-      create: (context) {
-        return CollectBloc(repository: trashRepository);
-      },
-      child: BlocProvider(
-        create: (context) {
+    final userRepository = UserRepository();
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) {
+          return CollectBloc(repository: trashRepository);
+        }),
+        BlocProvider(create: (context) {
           return GarbageListBloc(repository: trashRepository);
-        },
-        child: _blocBuilder(),
-      ),
+        }),
+        BlocProvider(create: (context) {
+          return MyProgressBloc(userRepository: userRepository);
+        }),
+      ],
+      child: _blocBuilder(),
     );
   }
 
@@ -69,6 +77,9 @@ class _HomePageState extends State<HomePage> {
         }
         if (state is ContactView) {
           return _contact();
+        }
+        if (state is TrackMyAdventure) {
+          return TrackMyAdventurePage();
         }
         return HomeContent();
       },

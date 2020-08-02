@@ -14,3 +14,5 @@ class HomeButtonPressed extends HomeEvent {}
 class CollectButtonPressed extends HomeEvent {}
 
 class UserListButtonPressed extends HomeEvent {}
+
+class TrackMyAdventureButtonPressed extends HomeEvent {}

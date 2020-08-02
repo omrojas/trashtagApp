@@ -26,4 +26,14 @@ class Queries {
       }
     }
   ''';
+
+  final getUserStatistics = '''
+    {
+      userStatistics{
+        cleanups
+        itemsPicked
+        itemsToNextLevel
+      }
+    }
+  ''';
 }

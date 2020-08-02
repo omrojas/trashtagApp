@@ -9,8 +9,6 @@ abstract class HomeState extends Equatable {
 
 class HomeInitial extends HomeState {}
 
-class ContactView extends HomeState {}
-
 class HomeView extends HomeState {
   final UserInformation userInformation;
 
@@ -21,5 +19,16 @@ class HomeView extends HomeState {
 }
 
 class CollectView extends HomeState {}
+
+class ContactView extends HomeState {}
+
+class TrackMyAdventure extends HomeState {
+  final UserInformation userInformation;
+
+  TrackMyAdventure({@required this.userInformation});
+
+  @override
+  List<Object> get props => [userInformation];
+}
 
 class UserListView extends HomeState {}

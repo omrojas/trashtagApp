@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
+import 'package:trashtagApp/src/bloc/my-progress/my_progress_bloc.dart';
 import 'package:trashtagApp/src/screens/home/home_option.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
@@ -45,7 +46,7 @@ class HomeContent extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: <Widget>[
           _cleanUp(context),
-          //_trackMyAdventure(),
+          _trackMyAdventure(context),
           //_reports(),
           _contact(context),
         ],
@@ -68,14 +69,20 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-  Widget _trackMyAdventure() {
+  Widget _trackMyAdventure(BuildContext context) {
     return HomeOption(
       assetName: 'assets/images/track-my-progress.jpeg',
       title: 'Track my adventure',
       subtitle: 'Take a look at your progress in making a change.',
       buttonText: 'SEE MY PROGRESS',
       onClick: () {
-        // TODO NAVIGATE BY BLOC
+        BlocProvider.of<MyProgressBloc>(context).add(
+          LoadStatistics(),
+        );
+
+        BlocProvider.of<HomeBloc>(context).add(
+          TrackMyAdventureButtonPressed(),
+        );
       },
     );
   }
