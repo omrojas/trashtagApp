@@ -4,6 +4,7 @@ import 'package:trashtagApp/src/bloc/collect/collect_bloc.dart';
 import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
+import 'package:trashtagApp/src/models/trash.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
@@ -99,10 +100,28 @@ class ItemsCollectedPage extends StatelessWidget {
 
   Widget _item(final SelectedTrash selectedTrash) {
     return ListTile(
-      leading: Icon(Icons.track_changes),
+      leading: _trashIcon(selectedTrash?.trash),
       title: Text(selectedTrash?.trash?.name ?? '-'),
       trailing: Text("${selectedTrash?.quantity ?? '-'}"),
     );
+  }
+
+  Widget _trashIcon(final Trash trash) {
+    if (trash?.iconUrl != null) {
+      return FadeInImage.assetNetwork(
+        placeholder: 'assets/images/no-image.png',
+        image: trash.iconUrl,
+        width: 70.0,
+        fit: BoxFit.cover,
+      );
+    } else {
+      return Image(
+        height: 30,
+        width: 70,
+        image: AssetImage('assets/images/no-image.png'),
+        fit: BoxFit.contain,
+      );
+    }
   }
 
   Widget _actions(BuildContext context) {

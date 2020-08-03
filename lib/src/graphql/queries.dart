@@ -14,6 +14,7 @@ class Queries {
         id
         name
         imageUrl
+        iconUrl
       }
     }
   ''';
