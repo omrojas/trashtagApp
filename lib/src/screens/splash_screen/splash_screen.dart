@@ -34,11 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/PORTADA.jpeg'),
+          image: AssetImage('assets/images/PORTADA.jpg'),
           alignment: Alignment.topCenter,
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.9),
+            Colors.black.withOpacity(0.6),
             BlendMode.dstATop,
           ),
         ),
