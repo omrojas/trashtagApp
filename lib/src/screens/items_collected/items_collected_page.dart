@@ -63,7 +63,7 @@ class ItemsCollectedPage extends StatelessWidget {
     return PageTitle(
       title: 'Items collected',
       subTitle:
-          'Check your list of items, then submit it to create a new report with your cleanig session information.',
+          'Check your list of items, then submit it to create a new report with your cleaning session information.',
     );
   }
 
