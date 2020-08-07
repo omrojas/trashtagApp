@@ -27,7 +27,7 @@ class _TrashWidgetState extends State<TrashWidget> {
         children: <Widget>[
           _image(),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               _counter(context),
@@ -46,7 +46,7 @@ class _TrashWidgetState extends State<TrashWidget> {
         _getTrashImage(),
         Container(
           decoration: BoxDecoration(
-            color: Colors.teal[700].withOpacity(0.4),
+            color: Colors.black.withOpacity(0.4),
           ),
         ),
       ],
@@ -95,7 +95,7 @@ class _TrashWidgetState extends State<TrashWidget> {
 
   Widget _actions(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         _actionButton(
           context: context,
