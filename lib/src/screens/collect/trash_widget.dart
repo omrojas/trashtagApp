@@ -125,7 +125,7 @@ class _TrashWidgetState extends State<TrashWidget> {
       child: IconButton(
         icon: Icon(
           icon,
-          color: Theme.of(context).primaryColor,
+          color: Colors.white,
           size: 30.0,
         ),
         onPressed: onClick,
