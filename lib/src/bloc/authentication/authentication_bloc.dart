@@ -35,11 +35,14 @@ class AuthenticationBloc
     }
 
     if (event is AuthenticationStarted) {
-      final bool hasToken = await authRepository.hasToken();
-
-      if (hasToken) {
-        yield AuthenticationSuccess();
-      } else {
+      try {
+        final bool hasToken = await authRepository.hasToken();
+        if (hasToken) {
+          yield AuthenticationSuccess();
+        } else {
+          yield AuthenticationInitial();
+        }
+      } catch (e) {
         yield AuthenticationInitial();
       }
     }
