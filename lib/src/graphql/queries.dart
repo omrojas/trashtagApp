@@ -34,6 +34,8 @@ class Queries {
         cleanups
         itemsPicked
         itemsToNextLevel
+        nextLevel
+        currentLevel
       }
     }
   ''';

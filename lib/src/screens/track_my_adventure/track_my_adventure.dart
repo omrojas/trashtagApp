@@ -125,12 +125,13 @@ class TrackMyAdventurePage extends StatelessWidget {
   ) {
     final cleanups = userStatistics.cleanups;
     final itemsPicked = userStatistics.itemsPicked;
+    final currentLevel = userStatistics?.currentLevel ?? '';
 
     return Flexible(
       child: Column(
         children: <Widget>[
           Text(
-            'Seed',
+            '$currentLevel',
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontSize: 32.0,
@@ -162,6 +163,7 @@ class TrackMyAdventurePage extends StatelessWidget {
 
   Widget _nextLevel(final UserStatistics userStatistics) {
     final itemsToNextLevel = userStatistics.itemsToNextLevel;
+    final nextLevel = userStatistics.nextLevel;
     if (itemsToNextLevel == null || itemsToNextLevel < 1) {
       return Container();
     }
@@ -171,7 +173,7 @@ class TrackMyAdventurePage extends StatelessWidget {
         Flexible(
           child: ListTile(
             title: Text(
-              '${itemsToNextLevel ?? ''} items left to next Level',
+              '${itemsToNextLevel ?? ''} items left to ${nextLevel ?? 'next'} Level',
               textAlign: TextAlign.center,
             ),
           ),
