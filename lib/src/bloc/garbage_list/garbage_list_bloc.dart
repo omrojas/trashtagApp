@@ -32,7 +32,7 @@ class GarbageListBloc extends Bloc<GarbageListEvent, GarbageListState> {
       yield SendingCollect();
       final errorMessage = 'We had a problem trying to save your items.';
       final succesfulMessage =
-          'Your list has been submitted for Approval. We will check your work in order to create an official TrashTag report with it';
+          'Your list has been submitted for approval. We will check your work in order to create an official TrashTag report with it';
 
       try {
         final trashes = _trashes.where((value) => value.quantity > 0).toList();
