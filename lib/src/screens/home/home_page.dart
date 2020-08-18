@@ -6,8 +6,8 @@ import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/bloc/my-progress/my_progress_bloc.dart';
 import 'package:trashtagApp/src/repository/contact_repository.dart';
+import 'package:trashtagApp/src/repository/statistics_repository.dart';
 import 'package:trashtagApp/src/repository/trash_repository.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
 import 'package:trashtagApp/src/screens/collect/collect_page.dart';
 import 'package:trashtagApp/src/screens/contact/contact_page.dart';
 import 'package:trashtagApp/src/screens/home/home_content.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _createProdivers() {
     final trashRepository = TrashRepository();
-    final userRepository = UserRepository();
+    final statisticsRepository = StatisticsRepository();
 
     return MultiBlocProvider(
       providers: [
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           return GarbageListBloc(repository: trashRepository);
         }),
         BlocProvider(create: (context) {
-          return MyProgressBloc(userRepository: userRepository);
+          return MyProgressBloc(repository: statisticsRepository);
         }),
       ],
       child: _blocBuilder(),

@@ -4,15 +4,15 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:trashtagApp/src/models/user_statistics.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
+import 'package:trashtagApp/src/repository/statistics_repository.dart';
 
 part 'my_progress_event.dart';
 part 'my_progress_state.dart';
 
 class MyProgressBloc extends Bloc<MyProgressEvent, MyProgressState> {
-  final UserRepository userRepository;
-  MyProgressBloc({@required this.userRepository})
-      : assert(userRepository != null),
+  final StatisticsRepository repository;
+  MyProgressBloc({@required this.repository})
+      : assert(repository != null),
         super();
 
   @override
@@ -27,7 +27,7 @@ class MyProgressBloc extends Bloc<MyProgressEvent, MyProgressState> {
       final errorMessage =
           'Some error has occurred when loading your information.';
       try {
-        final userStatistics = await userRepository.getUserStatistics();
+        final userStatistics = await repository.getUserStatistics();
         if (userStatistics != null) {
           yield StatisticsLoadsSuccessfully(userStatistics: userStatistics);
         } else {
