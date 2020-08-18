@@ -32,3 +32,5 @@ class TrackMyAdventure extends HomeState {
 }
 
 class UserListView extends HomeState {}
+
+class ReportsView extends HomeState {}

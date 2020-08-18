@@ -47,7 +47,7 @@ class HomeContent extends StatelessWidget {
         children: <Widget>[
           _cleanUp(context),
           _trackMyAdventure(context),
-          //_reports(),
+          _reports(context),
           _contact(context),
         ],
       ),
@@ -87,14 +87,16 @@ class HomeContent extends StatelessWidget {
     );
   }
 
-  Widget _reports() {
+  Widget _reports(BuildContext context) {
     return HomeOption(
       assetName: 'assets/images/reports.jpeg',
       title: 'Reports',
       subtitle: 'List all your collected garbage across a cleaning session.',
       buttonText: 'SEE REPORTS',
       onClick: () {
-        // TODO NAVIGATE BY BLOC
+        BlocProvider.of<HomeBloc>(context).add(
+          ReportsButtonPressed(),
+        );
       },
     );
   }
