@@ -13,7 +13,7 @@ class LoadingReport extends ReportsState {}
 
 class ItemsPickedUpInYear extends ReportsState {
   final int year;
-  final List<ReportData> data;
+  final List<PickedUpLitterPerMonth> data;
 
   ItemsPickedUpInYear({@required this.year, @required this.data});
 
@@ -22,16 +22,16 @@ class ItemsPickedUpInYear extends ReportsState {
 }
 
 class NumberOfVolunteers extends ReportsState {
-  final List<ReportData> data;
+  final int volunteers;
 
-  NumberOfVolunteers({@required this.data});
+  NumberOfVolunteers({@required this.volunteers});
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [volunteers];
 }
 
 class QuantityOfLitterByItems extends ReportsState {
-  final List<ReportData> data;
+  final List<QuantityOfLitterPickedUp> data;
 
   QuantityOfLitterByItems({@required this.data});
 

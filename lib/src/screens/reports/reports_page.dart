@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/reports/reports_bloc.dart';
-import 'package:trashtagApp/src/screens/reports/items_picked_out.dart';
+import 'package:trashtagApp/src/screens/reports/items_picked_up.dart';
 import 'package:trashtagApp/src/screens/reports/litter_by_items.dart';
 import 'package:trashtagApp/src/screens/reports/number_of_volunteers.dart';
+import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
-class ReportsPage extends StatelessWidget {
+class ReportsPage extends StatefulWidget {
   const ReportsPage({Key key}) : super(key: key);
+
+  @override
+  _ReportsPageState createState() => _ReportsPageState();
+}
+
+class _ReportsPageState extends State<ReportsPage> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ReportsBloc>(context).add(
+      BackButtonPressed(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +43,19 @@ class ReportsPage extends StatelessWidget {
           return LitterByItems();
         }
 
+        if (state is LoadingReport) {
+          return _loading();
+        }
+
         return initialState(context);
       },
+    );
+  }
+
+  Widget _loading() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: LoadingIndicator(),
     );
   }
 
@@ -69,11 +94,9 @@ class ReportsPage extends StatelessWidget {
 
   Widget _itemsPickedUpInYear(BuildContext context) {
     final int year = _getCurrentYear();
-    final String title = 'Number od Items Picked Up in $year.';
-    final String subtitle = 'Check out the number.';
     return _option(
-      title: title,
-      subtitle: subtitle,
+      title: 'Number od Items Picked Up in $year.',
+      subtitle: 'Check out the number.',
       onTab: () {
         BlocProvider.of<ReportsBloc>(context).add(
           ItemsPickedUpInYearButtonPressed(year: year),
@@ -83,12 +106,9 @@ class ReportsPage extends StatelessWidget {
   }
 
   Widget _numberOfVolunteers(BuildContext context) {
-    final String title = 'Number of volunteers.';
-    // TODO SET SUBTITLE
-    final String subtitle = '.';
     return _option(
-      title: title,
-      subtitle: subtitle,
+      title: 'Number of volunteers.',
+      subtitle: 'Discover how many we are.',
       onTab: () {
         BlocProvider.of<ReportsBloc>(context).add(
           NumberOfVolunteersButtonPressed(),
@@ -98,12 +118,9 @@ class ReportsPage extends StatelessWidget {
   }
 
   Widget _quantityOfLitterByItems(BuildContext context) {
-    final String title = 'Quantity of litter by items.';
-    // TODO SET SUBTITLE
-    final String subtitle = '';
     return _option(
-      title: title,
-      subtitle: subtitle,
+      title: 'Quantity of litter by items.',
+      subtitle: 'Look how much we have achieved.',
       onTab: () {
         BlocProvider.of<ReportsBloc>(context).add(
           QuantityOfLitterByItemsButtonPressed(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trashtagApp/src/bloc/reports/reports_bloc.dart';
+import 'package:trashtagApp/src/screens/reports/go_to_reports.dart';
 
 class Report extends StatelessWidget {
   final String title;
@@ -18,7 +17,7 @@ class Report extends StatelessWidget {
           SizedBox(height: 30.0),
           _title(),
           SizedBox(height: 20.0),
-          _goToBack(context),
+          GoToReports(),
           SizedBox(height: 40.0),
           _chart(),
         ],
@@ -33,22 +32,6 @@ class Report extends StatelessWidget {
         this.title,
         textAlign: TextAlign.center,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
-      ),
-    );
-  }
-
-  Widget _goToBack(BuildContext context) {
-    return FlatButton(
-      onPressed: () {
-        BlocProvider.of<ReportsBloc>(context).add(
-          BackButtonPressed(),
-        );
-      },
-      child: Text(
-        'Go back to Reports',
-        style: TextStyle(
-          color: Theme.of(context).primaryColor,
-        ),
       ),
     );
   }

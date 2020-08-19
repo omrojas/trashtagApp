@@ -1,33 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/reports/reports_bloc.dart';
-import 'package:trashtagApp/src/models/reports/report_data.dart';
-import 'package:trashtagApp/src/screens/reports/report.dart';
-import 'package:trashtagApp/src/screens/reports/chart_tools.dart';
+import 'package:trashtagApp/src/screens/reports/go_to_reports.dart';
 
 class Volunteers extends StatelessWidget {
   const Volunteers({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO change title
-    return Report(
-      title: 'Number of volunteers',
-      chart: _chartBuilder(),
+    return Column(
+      children: [
+        SizedBox(height: 70),
+        Text(
+          'We are an incredible community',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+        ),
+        SizedBox(height: 30),
+        _volunteersBuilder(context),
+        SizedBox(height: 30),
+        GoToReports()
+      ],
     );
   }
 
-  Widget _chartBuilder() {
+  Widget _volunteersBuilder(BuildContext contex) {
     return BlocBuilder<ReportsBloc, ReportsState>(
       builder: (context, state) {
         if (state is NumberOfVolunteers) {
-          return _chart(state.data);
+          return _volunteers(context, state.volunteers);
         }
+
         return Container();
       },
     );
   }
 
-  Widget _chart(final List<ReportData> data) =>
-      getLinearChart(id: 'volunteers', data: data);
+  Widget _volunteers(BuildContext context, final int volunteers) {
+    return ListTile(
+      title: Text(
+        '$volunteers volunteers',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Theme.of(context).primaryColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+        ),
+      ),
+      subtitle: Padding(
+        padding: const EdgeInsets.only(top: 30.0),
+        child: Text(
+          'We are the ones who are making a better world',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -39,4 +39,28 @@ class Queries {
       }
     }
   ''';
+
+  final pickedUpLitterPerMonth = '''
+    {
+      pickedUpLitterPerMonth{
+        month
+        quantity
+      }
+    }
+  ''';
+
+  final volunteersNumber = '''
+    {
+      volunteersNumber
+    }
+  ''';
+
+  final quantityOfLitterByItems = '''
+    {
+      quantityOfLitterByItems{
+        garbage
+        quantity
+      }
+    }
+  ''';
 }
