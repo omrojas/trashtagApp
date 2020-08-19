@@ -18,7 +18,7 @@ class ReportsPage extends StatelessWidget {
     return BlocBuilder<ReportsBloc, ReportsState>(
       builder: (context, state) {
         if (state is ItemsPickedUpInYear) {
-          return ItemasPickedOut(year: state.year);
+          return ItemasPickedUp(year: state.year);
         }
 
         if (state is NumberOfVolunteers) {

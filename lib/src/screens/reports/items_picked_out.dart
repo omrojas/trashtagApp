@@ -5,9 +5,9 @@ import 'package:trashtagApp/src/models/reports/report_data.dart';
 import 'package:trashtagApp/src/screens/reports/report.dart';
 import 'package:trashtagApp/src/screens/reports/chart_tools.dart';
 
-class ItemasPickedOut extends StatelessWidget {
+class ItemasPickedUp extends StatelessWidget {
   final int year;
-  const ItemasPickedOut({Key key, @required this.year})
+  const ItemasPickedUp({Key key, @required this.year})
       : assert(year != null),
         super(key: key);
 
