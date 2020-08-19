@@ -43,8 +43,6 @@ class _HomePageState extends State<HomePage> {
           child: _createProdivers(),
         ),
       ),
-      // TODO remove this line
-      // floatingActionButton: AddTrash(),
       bottomNavigationBar: Menu(),
     );
   }
