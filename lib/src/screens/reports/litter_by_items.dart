@@ -74,7 +74,7 @@ class LitterByItems extends StatelessWidget {
   ) {
     return data.map((e) {
       final length = e.garbage.length;
-      e.garbage = length <= 10 ? e.garbage : '${e.garbage.substring(0, 10)}...';
+      e.garbage = length <= 7 ? e.garbage : '${e.garbage.substring(0, 7)}..';
       return e;
     }).toList();
   }
