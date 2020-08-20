@@ -53,10 +53,8 @@ class _CollectPageState extends State<CollectPage> {
   }
 
   Widget _trashesGrid(final List<SelectedTrash> trashes) {
-    final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * .7,
-      padding: EdgeInsets.only(bottom: 120.0),
+      height: 450.0,
       child: GridView.count(
         crossAxisCount: 2,
         children: _trashes(trashes),
