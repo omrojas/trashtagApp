@@ -20,8 +20,8 @@ class HomeOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 10.0),
-      width: 360.0,
+      padding: EdgeInsets.only(right: 5.0),
+      width: 350.0,
       child: _content(),
     );
   }
