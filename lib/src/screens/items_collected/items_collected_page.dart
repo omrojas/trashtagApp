@@ -5,10 +5,12 @@ import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/models/trash.dart';
+import 'package:trashtagApp/src/screens/items_collected/error_message.dart';
+import 'package:trashtagApp/src/screens/items_collected/success_message.dart';
+import 'package:trashtagApp/src/widgets/green_button.dart';
 import 'package:trashtagApp/src/widgets/link_button.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ItemsCollectedPage extends StatelessWidget {
   @override
@@ -35,11 +37,11 @@ class ItemsCollectedPage extends StatelessWidget {
           }
 
           if (state is SuccessfulSend) {
-            return _successMessage(context, state.message);
+            return SuccessMessage(message: state.message);
           }
 
           if (state is SendError) {
-            return _errorMessage(state.error);
+            return ErrorMessage(message: state.error);
           }
 
           return _noData();
@@ -156,7 +158,7 @@ class ItemsCollectedPage extends StatelessWidget {
   }
 
   Widget _submitButton(BuildContext context) {
-    return _button(
+    return GreenButton(
       text: 'SUBMIT LIST',
       onPressed: () => _onSubmit(context),
     );
@@ -168,94 +170,8 @@ class ItemsCollectedPage extends StatelessWidget {
     );
   }
 
-  Widget _successMessage(BuildContext context, final String message) {
-    return Column(
-      children: <Widget>[
-        SizedBox(height: 40.0),
-        ListTile(
-          title: Text(
-            'Thanks!',
-            style: TextStyle(
-              fontSize: 25.0,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          subtitle: Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: Text(
-              '$message',
-              style: TextStyle(fontSize: 18.0),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        SizedBox(height: 30.0),
-        _trophy(),
-        SizedBox(height: 30.0),
-        _goToDashboardButton(context),
-        SizedBox(height: 30.0),
-        Divider(),
-        Text(
-          "If you want to let us know how clean or dirty you left the beach go to this link",
-          textAlign: TextAlign.center,
-        ),
-        LinkButton(text: 'Click me!', onPressed: _launchURL),
-      ],
-    );
-  }
-
-  Widget _errorMessage(final String errorMessage) {
-    return Container(
-      margin: EdgeInsets.only(top: 20.0),
-      child: ListTile(
-        title: Text(
-          'Sorry',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.redAccent),
-        ),
-        subtitle: Text(
-          '$errorMessage',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.redAccent),
-        ),
-      ),
-    );
-  }
-
-  Widget _trophy() {
-    return Image(
-      image: AssetImage('assets/images/best.gif'),
-      height: 200,
-    );
-  }
-
-  Widget _goToDashboardButton(BuildContext context) {
-    return _button(
-      text: 'GO TO MY DASHBOARD',
-      onPressed: () => _goToDashboard(context),
-    );
-  }
-
   List<SelectedTrash> _notEmptyTrashes(final List<SelectedTrash> trashes) {
     return trashes.where((value) => value.quantity > 0).toList();
-  }
-
-  Widget _button({
-    @required final String text,
-    @required final Function onPressed,
-  }) {
-    return RaisedButton(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Text(
-        '$text',
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
-      ),
-      onPressed: onPressed,
-    );
   }
 
   void _onSubmit(BuildContext context) {
@@ -269,21 +185,6 @@ class ItemsCollectedPage extends StatelessWidget {
       BlocProvider.of<CollectBloc>(context).add(
         ResetCounters(),
       );
-    }
-  }
-
-  void _goToDashboard(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context).add(
-      HomeButtonPressed(),
-    );
-  }
-
-  void _launchURL() async {
-    const url = 'https://mahapach-5bf5a.firebaseapp.com/';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      print('Link could not be opened');
     }
   }
 }
