@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       child: ListTile(
         title: Text(
-          'Join us in this adventure.',
+          'Join us in this adventure',
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Montserrat',
