@@ -46,8 +46,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _createProdivers() {
-    final trashRepository = TrashRepository();
     final statisticsRepository = StatisticsRepository();
+    final contactRepository = ContactRepository();
+    final trashRepository = TrashRepository();
 
     return MultiBlocProvider(
       providers: [
@@ -62,6 +63,9 @@ class _HomePageState extends State<HomePage> {
         }),
         BlocProvider(create: (context) {
           return ReportsBloc(repository: statisticsRepository);
+        }),
+        BlocProvider(create: (context) {
+          return ContactBloc(repository: contactRepository);
         }),
       ],
       child: _blocBuilder(),
@@ -78,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           return ItemsCollectedPage();
         }
         if (state is ContactView) {
-          return _contact();
+          return ContactPage();
         }
         if (state is TrackMyAdventure) {
           return TrackMyAdventurePage();
@@ -88,17 +92,6 @@ class _HomePageState extends State<HomePage> {
         }
         return HomeContent();
       },
-    );
-  }
-
-  Widget _contact() {
-    // TODO move to 'createProviders'
-    return BlocProvider(
-      create: (context) {
-        final ContactRepository contactRepository = ContactRepository();
-        return ContactBloc(repository: contactRepository);
-      },
-      child: ContactPage(),
     );
   }
 
