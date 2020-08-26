@@ -53,7 +53,9 @@ class _ContactPageState extends State<ContactPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _content(context);
+    return SingleChildScrollView(
+      child: _content(context),
+    );
   }
 
   Widget _content(BuildContext context) {

@@ -39,9 +39,7 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar(context),
       endDrawer: TrashTagDrawer(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: _createProdivers(),
-        ),
+        child: _createProdivers(),
       ),
       bottomNavigationBar: Menu(),
     );
@@ -94,6 +92,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _contact() {
+    // TODO move to 'createProviders'
     return BlocProvider(
       create: (context) {
         final ContactRepository contactRepository = ContactRepository();

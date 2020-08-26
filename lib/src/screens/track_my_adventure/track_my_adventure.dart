@@ -11,13 +11,15 @@ class TrackMyAdventurePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _title(),
-        SizedBox(height: 20.0),
-        _name(context),
-        _userStatisticsBuilder(context),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          _title(),
+          SizedBox(height: 20.0),
+          _name(context),
+          _userStatisticsBuilder(context),
+        ],
+      ),
     );
   }
 
@@ -111,7 +113,7 @@ class TrackMyAdventurePage extends StatelessWidget {
 
   Widget _cup() {
     return Image(
-      // TODO return the correct image
+      // TODO return the correct image | get from API
       image: AssetImage('assets/images/best.gif'),
       fit: BoxFit.cover,
       width: 120.0,

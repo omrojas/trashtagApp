@@ -25,7 +25,9 @@ class _ReportsPageState extends State<ReportsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _builder(context);
+    return SingleChildScrollView(
+      child: _builder(context),
+    );
   }
 
   Widget _builder(BuildContext context) {

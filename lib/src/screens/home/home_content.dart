@@ -10,15 +10,17 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 40.0),
-          _message(),
-          SizedBox(height: 60.0),
-          _options(context),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 40.0),
+            _message(),
+            SizedBox(height: 60.0),
+            _options(context),
+          ],
+        ),
       ),
     );
   }
