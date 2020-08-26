@@ -53,8 +53,7 @@ class _CollectPageState extends State<CollectPage> {
   }
 
   Widget _trashesGrid(final List<SelectedTrash> trashes) {
-    return Container(
-      height: 450.0,
+    return Flexible(
       child: GridView.count(
         crossAxisCount: 2,
         children: _trashes(trashes),

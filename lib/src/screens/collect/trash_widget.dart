@@ -58,7 +58,6 @@ class _TrashWidgetState extends State<TrashWidget> {
       return FadeInImage.assetNetwork(
         placeholder: 'assets/images/no-image.png',
         image: widget.selectedTrash?.trash?.imageUrl,
-        height: 300.0,
         width: double.infinity,
         fit: BoxFit.cover,
       );
@@ -68,7 +67,7 @@ class _TrashWidgetState extends State<TrashWidget> {
 
   Widget _counter(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.only(right: 20.0),
       child: Text(
         '${widget.selectedTrash?.quantity ?? 0}',
         style: TextStyle(
