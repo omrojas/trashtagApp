@@ -71,6 +71,7 @@ class ItemsCollectedPage extends StatelessWidget {
     BuildContext context,
     final List<SelectedTrash> selectedTrashes,
   ) {
+    final height = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -79,7 +80,8 @@ class ItemsCollectedPage extends StatelessWidget {
         ),
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
-      height: 400.0,
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      height: height * .6,
       child: panelContent(context, selectedTrashes),
     );
   }
@@ -100,6 +102,7 @@ class ItemsCollectedPage extends StatelessWidget {
 
   Widget _item(final SelectedTrash selectedTrash) {
     return ListTile(
+      contentPadding: EdgeInsets.only(right: 20.0),
       leading: _trashIcon(selectedTrash?.trash),
       title: Text(selectedTrash?.trash?.name ?? '-'),
       trailing: Text("${selectedTrash?.quantity ?? '-'}"),
