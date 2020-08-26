@@ -8,6 +8,7 @@ import 'package:trashtagApp/src/models/trash.dart';
 import 'package:trashtagApp/src/widgets/link_button.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ItemsCollectedPage extends StatelessWidget {
   @override
@@ -189,10 +190,17 @@ class ItemsCollectedPage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 40.0),
+        SizedBox(height: 30.0),
         _trophy(),
-        SizedBox(height: 40.0),
+        SizedBox(height: 30.0),
         _goToDashboardButton(context),
+        SizedBox(height: 30.0),
+        Divider(),
+        Text(
+          "If you want to let us know how clean or dirty you left the beach go to this link",
+          textAlign: TextAlign.center,
+        ),
+        LinkButton(text: 'Click me!', onPressed: _launchURL),
       ],
     );
   }
@@ -268,5 +276,14 @@ class ItemsCollectedPage extends StatelessWidget {
     BlocProvider.of<HomeBloc>(context).add(
       HomeButtonPressed(),
     );
+  }
+
+  void _launchURL() async {
+    const url = 'https://mahapach-5bf5a.firebaseapp.com/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Link could not be opened');
+    }
   }
 }
