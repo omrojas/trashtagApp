@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/garbage_list/garbage_list_bloc.dart';
 import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/models/trash.dart';
+import 'package:trashtagApp/src/widgets/link_button.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
@@ -51,11 +52,24 @@ class ItemsCollectedPage extends StatelessWidget {
     final List<SelectedTrash> selectedTrashes,
   ) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         _title(),
-        SizedBox(height: 25.0),
+        SizedBox(height: 10.0),
+        _goToCollect(context),
         panel(context, selectedTrashes),
       ],
+    );
+  }
+
+  Widget _goToCollect(BuildContext context) {
+    return LinkButton(
+      text: 'If you wish to edit this list go Collect',
+      onPressed: () {
+        BlocProvider.of<HomeBloc>(context).add(
+          CollectButtonPressed(),
+        );
+      },
     );
   }
 
