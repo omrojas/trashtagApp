@@ -4,6 +4,7 @@ import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/signup/independent/independent_signup_bloc.dart';
 import 'package:trashtagApp/src/repository/auth_repository.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
+import 'package:trashtagApp/src/widgets/scaffold_scroll.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 import 'independent_volunteer_form.dart';
@@ -16,14 +17,8 @@ class IndependentVolunteerPage extends StatelessWidget {
         super(key: key);
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _blocProvider(context),
-          ),
-        ),
-      ),
+    return ScaffoldScroll(
+      child: _blocProvider(context),
     );
   }
 

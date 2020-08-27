@@ -7,6 +7,7 @@ import 'package:trashtagApp/src/repository/auth_repository.dart';
 import 'package:trashtagApp/src/screens/organization/create_organization_page.dart';
 import 'package:trashtagApp/src/screens/signup/organization_volunteer_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
+import 'package:trashtagApp/src/widgets/scaffold_scroll.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class OrganizationVolunteerPage extends StatelessWidget {
@@ -43,14 +44,8 @@ class OrganizationVolunteerPage extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _content(context),
-          ),
-        ),
-      ),
+    return ScaffoldScroll(
+      child: _content(context),
     );
   }
 

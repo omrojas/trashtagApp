@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
+import 'package:trashtagApp/src/widgets/scaffold_scroll.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -43,13 +44,9 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         ),
       ),
-      child: Scaffold(
+      child: ScaffoldScroll(
         backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _content(),
-          ),
-        ),
+        child: _content(),
       ),
     );
   }

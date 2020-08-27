@@ -129,16 +129,14 @@ class _CreateOrganizationFormState extends State<CreateOrganizationForm> {
   }
 
   Widget _phones() {
-    final size = MediaQuery.of(context).size;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Container(
-          width: (size.width / 2) * .8,
+        Expanded(
           child: _phoneOne(),
         ),
-        Container(
-          width: (size.width / 2) * .8,
+        SizedBox(width: 10),
+        Expanded(
           child: _phoneTwo(),
         ),
       ],

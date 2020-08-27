@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart
 import 'package:trashtagApp/src/repository/organization_repository.dart';
 import 'package:trashtagApp/src/screens/organization/create_organization_form.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
+import 'package:trashtagApp/src/widgets/scaffold_scroll.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
 class CreateOrganizationPage extends StatelessWidget {
@@ -20,14 +21,8 @@ class CreateOrganizationPage extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _blocProvider(context),
-          ),
-        ),
-      ),
+    return ScaffoldScroll(
+      child: _blocProvider(context),
     );
   }
 

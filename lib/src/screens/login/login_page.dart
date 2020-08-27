@@ -4,6 +4,7 @@ import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart';
 import 'package:trashtagApp/src/bloc/login/login_bloc.dart';
 import 'package:trashtagApp/src/screens/login/login_form.dart';
 import 'package:trashtagApp/src/repository/auth_repository.dart';
+import 'package:trashtagApp/src/widgets/scaffold_scroll.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 import 'package:trashtagApp/src/widgets/trashtag_logo.dart';
 
@@ -22,14 +23,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: _content(context),
-          ),
-        ),
-      ),
+    return ScaffoldScroll(
+      child: _content(context),
     );
   }
 
