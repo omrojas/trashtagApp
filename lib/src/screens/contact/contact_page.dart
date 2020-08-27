@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/models/user_message.dart';
 import 'package:trashtagApp/src/stream_controllers/contact/contact_stream_controller.dart';
 import 'package:trashtagApp/src/widgets/trashtag_button.dart';
+import 'package:trashtagApp/src/widgets/trashtag_container.dart';
 
 class ContactPage extends StatefulWidget {
   ContactPage({Key key}) : super(key: key);
@@ -86,10 +87,9 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   Widget _foreground(BuildContext context, ContactState state) {
-    final size = MediaQuery.of(context).size;
-    return Center(
-      child: Container(
-        width: size.width * 0.85,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      child: TrashTagContainer(
         child: Column(
           children: <Widget>[
             SizedBox(height: 80.0),
