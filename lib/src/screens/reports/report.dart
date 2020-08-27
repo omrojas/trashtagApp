@@ -4,8 +4,12 @@ import 'package:trashtagApp/src/screens/reports/go_to_reports.dart';
 class Report extends StatelessWidget {
   final String title;
   final Widget chart;
-  const Report({Key key, @required this.title, @required this.chart})
-      : assert(title != null, chart != null),
+
+  const Report({
+    Key key,
+    @required this.title,
+    @required this.chart,
+  })  : assert(title != null, chart != null),
         super(key: key);
 
   @override
@@ -19,7 +23,8 @@ class Report extends StatelessWidget {
           SizedBox(height: 20.0),
           GoToReports(),
           SizedBox(height: 40.0),
-          _chart(),
+          this.chart,
+          SizedBox(height: 40.0),
         ],
       ),
     );
@@ -33,13 +38,6 @@ class Report extends StatelessWidget {
         textAlign: TextAlign.center,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
       ),
-    );
-  }
-
-  Widget _chart() {
-    return Container(
-      height: 300,
-      child: this.chart,
     );
   }
 }

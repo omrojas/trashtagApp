@@ -27,6 +27,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: appBar(context),
       endDrawer: TrashTagDrawer(),
       body: SafeArea(
@@ -88,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           return TrackMyAdventurePage();
         }
         if (state is ReportsView) {
-          return ReportsPage();
+          return ReportsPage(scaffoldKey: _scaffoldKey);
         }
         return HomeContent();
       },

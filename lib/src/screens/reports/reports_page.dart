@@ -8,7 +8,8 @@ import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
 
 class ReportsPage extends StatefulWidget {
-  const ReportsPage({Key key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const ReportsPage({Key key, @required this.scaffoldKey}) : super(key: key);
 
   @override
   _ReportsPageState createState() => _ReportsPageState();
@@ -34,7 +35,10 @@ class _ReportsPageState extends State<ReportsPage> {
     return BlocBuilder<ReportsBloc, ReportsState>(
       builder: (context, state) {
         if (state is ItemsPickedUpInYear) {
-          return ItemasPickedUp(year: state.year);
+          return ItemasPickedUp(
+            scaffoldKey: widget.scaffoldKey,
+            year: state.year,
+          );
         }
 
         if (state is NumberOfVolunteers) {
@@ -42,7 +46,7 @@ class _ReportsPageState extends State<ReportsPage> {
         }
 
         if (state is QuantityOfLitterByItems) {
-          return LitterByItems();
+          return LitterByItems(scaffoldKey: widget.scaffoldKey);
         }
 
         if (state is LoadingReport) {

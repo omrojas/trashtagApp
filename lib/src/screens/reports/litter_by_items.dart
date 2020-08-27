@@ -1,12 +1,17 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trashtagApp/src/bloc/reports/reports_bloc.dart';
 import 'package:trashtagApp/src/models/reports/quantity_of_litter_picked_up.dart';
 import 'package:trashtagApp/src/screens/reports/report.dart';
+import 'package:trashtagApp/src/screens/reports/report_tools.dart';
+import 'package:trashtagApp/src/widgets/green_button.dart';
 
 class LitterByItems extends StatelessWidget {
-  const LitterByItems({Key key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  const LitterByItems({Key key, @required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,17 @@ class LitterByItems extends StatelessWidget {
     return BlocBuilder<ReportsBloc, ReportsState>(
       builder: (context, state) {
         if (state is QuantityOfLitterByItems) {
-          return _chart(state.data);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 300.0,
+                child: _chart(state.data),
+              ),
+              SizedBox(height: 100.0),
+              _downloadButton(state.data),
+            ],
+          );
         }
 
         return Container();
@@ -33,9 +48,8 @@ class LitterByItems extends StatelessWidget {
       return Container();
     }
 
-    final items = _substringGarbage(data);
     return new charts.PieChart(
-      _donutSeries(items),
+      _donutSeries(data),
       animate: true,
       defaultRenderer: new charts.ArcRendererConfig(
         arcWidth: 70,
@@ -61,7 +75,7 @@ class LitterByItems extends StatelessWidget {
       new charts.Series<QuantityOfLitterPickedUp, String>(
         id: 'litterByItems',
         data: data,
-        domainFn: (QuantityOfLitterPickedUp data, _) => data.garbage,
+        domainFn: (QuantityOfLitterPickedUp data, _) => _garbageName(data),
         measureFn: (QuantityOfLitterPickedUp data, _) => data.quantity,
         labelAccessorFn: (QuantityOfLitterPickedUp data, _) =>
             '${data.quantity}',
@@ -69,13 +83,69 @@ class LitterByItems extends StatelessWidget {
     ];
   }
 
-  List<QuantityOfLitterPickedUp> _substringGarbage(
-    final List<QuantityOfLitterPickedUp> data,
-  ) {
-    return data.map((e) {
+  String _garbageName(final QuantityOfLitterPickedUp e) {
+    try {
       final length = e.garbage.length;
-      e.garbage = length <= 7 ? e.garbage : '${e.garbage.substring(0, 7)}..';
-      return e;
-    }).toList();
+      return length <= 7 ? e.garbage : '${e.garbage.substring(0, 7)}..';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  Widget _downloadButton(final List<QuantityOfLitterPickedUp> data) {
+    return GreenButton(
+      onPressed: () => _createExcel(data),
+      text: 'DOWNLOAD .XLSX',
+    );
+  }
+
+  void _createExcel(final List<QuantityOfLitterPickedUp> data) async {
+    try {
+      final excel = Excel.createExcel();
+      final sheet = await excel.getDefaultSheet();
+
+      excel.appendRow(sheet, ['Quantity of Litter by Items']);
+      excel.appendRow(sheet, ['']);
+      excel.appendRow(sheet, ['Garbage', 'Quantity']);
+      data.forEach((e) {
+        excel.appendRow(sheet, ['${e.garbage}', '${e.quantity}']);
+      });
+
+      final List<int> content = await excel.encode();
+      await _onWriteFile(content);
+    } catch (e) {
+      _errorAlert();
+    }
+  }
+
+  Future<void> _onWriteFile(final List<int> fileContent) async {
+    await writeFile(
+      fileContent: fileContent,
+      fileName: getFileName,
+      errorAlert: _errorAlert,
+      successAlert: _successAlert,
+    );
+  }
+
+  String get getFileName {
+    final now = DateTime.now();
+    final time = '${now.year}-${now.month}-${now.day}-${now.hour}';
+    return 'litter_by_items_$time';
+  }
+
+  void _successAlert() {
+    successAlert(
+      scaffoldKey: scaffoldKey,
+      title: 'Successfully generated file!',
+      subTitle: '',
+    );
+  }
+
+  void _errorAlert() {
+    errorAlert(
+      scaffoldKey: scaffoldKey,
+      title: 'An error occurred while trying to generate the file.',
+      subTitle: 'Check permissions or try again later.',
+    );
   }
 }
