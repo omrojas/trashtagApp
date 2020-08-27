@@ -16,4 +16,10 @@ class SetGarbageList extends GarbageListEvent {
   List<Object> get props => [trashes];
 }
 
-class SubmitList extends GarbageListEvent {}
+class SubmitList extends GarbageListEvent {
+  final Coordinate coordinate;
+
+  SubmitList({@required this.coordinate});
+  @override
+  List<Object> get props => [coordinate];
+}

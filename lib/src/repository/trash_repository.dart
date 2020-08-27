@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trashtagApp/src/models/coordinate.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/models/trash.dart';
 
@@ -23,11 +24,12 @@ class TrashRepository extends ApiRepository {
 
   Future<bool> submitCollect({
     @required final List<SelectedTrash> selectedTrashes,
+    @required final Coordinate coordinate,
   }) async {
     final trashes = selectedTrashes
         .map((e) => {'trashId': e.trash.id, 'quantity': e.quantity})
         .toList();
-
+    // TODO Send coordinate to API
     final response = await graphQLService.performMutation(
       mutations.submitCollect,
       variables: {

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:trashtagApp/src/models/coordinate.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/repository/trash_repository.dart';
 
@@ -39,6 +40,7 @@ class GarbageListBloc extends Bloc<GarbageListEvent, GarbageListState> {
         if (trashes.isNotEmpty) {
           final status = await repository.submitCollect(
             selectedTrashes: trashes,
+            coordinate: event.coordinate,
           );
 
           if (status) {
