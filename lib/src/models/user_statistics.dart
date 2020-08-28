@@ -4,6 +4,7 @@ class UserStatistics {
   int itemsToNextLevel;
   String nextLevel;
   String currentLevel;
+  String currentLevelIcon;
 
   UserStatistics({
     this.cleanups,
@@ -11,6 +12,7 @@ class UserStatistics {
     this.itemsToNextLevel,
     this.nextLevel,
     this.currentLevel,
+    this.currentLevelIcon,
   });
 
   UserStatistics.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class UserStatistics {
     itemsToNextLevel = json['itemsToNextLevel'];
     nextLevel = json['nextLevel'];
     currentLevel = json['currentLevel'];
+    currentLevelIcon = json['currentLevelIcon'];
   }
 
   Map<String, dynamic> toJson() {
@@ -28,6 +31,7 @@ class UserStatistics {
     data['itemsToNextLevel'] = this.itemsToNextLevel;
     data['nextLevel'] = this.nextLevel;
     data['currentLevel'] = this.currentLevel;
+    data['currentLevelIcon'] = this.currentLevelIcon;
     return data;
   }
 }

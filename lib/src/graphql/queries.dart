@@ -36,6 +36,7 @@ class Queries {
         itemsToNextLevel
         nextLevel
         currentLevel
+        currentLevelIcon
       }
     }
   ''';

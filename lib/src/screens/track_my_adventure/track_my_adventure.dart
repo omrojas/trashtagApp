@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/my-progress/my_progress_bloc.dart';
 import 'package:trashtagApp/src/models/user_statistics.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
 import 'package:trashtagApp/src/widgets/page_title.dart';
+import 'package:trashtagApp/src/widgets/trashtag_container.dart';
 
 class TrackMyAdventurePage extends StatelessWidget {
   const TrackMyAdventurePage({Key key}) : super(key: key);
@@ -86,14 +87,16 @@ class TrackMyAdventurePage extends StatelessWidget {
     BuildContext context,
     final UserStatistics userStatistics,
   ) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          _cup(),
-          _statistics(context, userStatistics),
-        ],
+    return TrashTagContainer(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _cup(userStatistics?.currentLevelIcon),
+            _statistics(context, userStatistics),
+          ],
+        ),
       ),
     );
   }
@@ -111,13 +114,16 @@ class TrackMyAdventurePage extends StatelessWidget {
     );
   }
 
-  Widget _cup() {
-    return Image(
-      // TODO return the correct image | get from API
-      image: AssetImage('assets/images/best.gif'),
-      fit: BoxFit.cover,
+  Widget _cup(final String levelIconUrl) {
+    if (levelIconUrl == null) {
+      return Container();
+    }
+    return FadeInImage.assetNetwork(
+      placeholder: 'assets/images/no-image.png',
+      image: levelIconUrl,
       width: 120.0,
       height: 120.0,
+      fit: BoxFit.cover,
     );
   }
 
