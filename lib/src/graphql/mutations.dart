@@ -40,8 +40,8 @@ class Mutations {
   ''';
 
   final String submitCollect = '''
-    mutation cleanup(\$trashes: [TrashQuantity]!) {
-      cleanup(trashes: \$trashes) {
+    mutation cleanup(\$trashes: [TrashQuantity]!, \$latitude: String!, \$longitude: String!) {
+      cleanup(trashes: \$trashes, latitude: \$latitude, longitude: \$longitude) {
         saved
       }
     }

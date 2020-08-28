@@ -20,11 +20,12 @@ class TrashRepository extends ApiRepository {
     final trashes = selectedTrashes
         .map((e) => {'trashId': e.trash.id, 'quantity': e.quantity})
         .toList();
-    // TODO Send coordinate to API
     final response = await graphQLService.performMutation(
       mutations.submitCollect,
       variables: {
         'trashes': trashes,
+        'latitude': coordinate.latitude,
+        'longitude': coordinate.longitude,
       },
     );
 
