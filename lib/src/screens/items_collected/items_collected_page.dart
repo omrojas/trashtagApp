@@ -68,7 +68,7 @@ class ItemsCollectedPage extends StatelessWidget {
 
   Widget _goToCollect(BuildContext context) {
     return LinkButton(
-      text: 'If you wish to edit this list go Collect',
+      text: 'If you wish to edit this list go to Collect',
       onPressed: () {
         BlocProvider.of<HomeBloc>(context).add(
           CollectButtonPressed(),
