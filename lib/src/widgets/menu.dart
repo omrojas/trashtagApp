@@ -78,7 +78,7 @@ class Menu extends StatelessWidget {
   Widget _yourListButton(BuildContext context) {
     return _menuButton(
       context: context,
-      name: 'Your List',
+      name: 'Submit',
       assetName: 'assets/images/my-list.png',
       onPresed: () {
         _onListButtonPressed(context);
