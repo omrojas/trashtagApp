@@ -101,7 +101,7 @@ class _ReportsPageState extends State<ReportsPage> {
   Widget _itemsPickedUpInYear(BuildContext context) {
     final int year = _getCurrentYear();
     return _option(
-      title: 'Number od Items Picked Up in $year.',
+      title: 'Number of Items Picked Up in $year.',
       subtitle: 'Check out the number.',
       onTab: () {
         BlocProvider.of<ReportsBloc>(context).add(
