@@ -112,8 +112,9 @@ class ItemsCollectedPage extends StatelessWidget {
     if (trashes.isEmpty) {
       return _noData();
     }
-    final widgets = trashes.map((e) => _item(e)).toList();
+    final List<Widget> widgets = [];
     widgets.add(_actions(context));
+    widgets.addAll(trashes.map((e) => _item(e)).toList());
 
     return ListView(children: widgets);
   }
@@ -146,22 +147,22 @@ class ItemsCollectedPage extends StatelessWidget {
   }
 
   Widget _actions(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Divider(),
-          _submitButton(context),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        _submitButton(context),
+        Divider(),
+      ],
     );
   }
 
   Widget _submitButton(BuildContext context) {
-    return GreenButton(
-      text: 'SUBMIT LIST',
-      onPressed: () => _onSubmit(context),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: GreenButton(
+        text: 'SUBMIT LIST',
+        onPressed: () => _onSubmit(context),
+      ),
     );
   }
 
