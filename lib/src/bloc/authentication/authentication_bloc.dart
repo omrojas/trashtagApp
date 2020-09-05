@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:trashtagApp/src/repository/auth_repository.dart';
 
 part 'authentication_event.dart';
@@ -36,8 +37,8 @@ class AuthenticationBloc
 
     if (event is AuthenticationStarted) {
       try {
-        final bool hasToken = await authRepository.hasToken();
-        if (hasToken) {
+        bool validToken = await isValidToken();
+        if (validToken) {
           yield AuthenticationSuccess();
         } else {
           yield AuthenticationInitial();
@@ -57,6 +58,19 @@ class AuthenticationBloc
       yield AuthenticationInProgress();
       await authRepository.deleteToken();
       yield AuthenticationInitial();
+    }
+  }
+
+  Future<bool> isValidToken() async {
+    try {
+      final String token = await authRepository.getToken();
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+      final exp = decodedToken['exp'];
+      final expiration = new DateTime.fromMillisecondsSinceEpoch(exp * 1000);
+      final now = new DateTime.now();
+      return expiration.isAfter(now);
+    } catch (e) {
+      return false;
     }
   }
 }

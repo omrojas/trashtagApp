@@ -34,9 +34,8 @@ class AuthRepository extends ApiRepository {
     return;
   }
 
-  Future<bool> hasToken() async {
-    final token = await storage.read(key: 'token');
-    return token != null;
+  Future<String> getToken() async {
+    return await storage.read(key: 'token');
   }
 
   Future<bool> createIndividualVolunteer({
