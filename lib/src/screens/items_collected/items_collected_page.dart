@@ -6,8 +6,8 @@ import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
 import 'package:trashtagApp/src/models/select_trash.dart';
 import 'package:trashtagApp/src/models/trash.dart';
 import 'package:trashtagApp/src/screens/items_collected/error_message.dart';
-import 'package:trashtagApp/src/screens/items_collected/location.dart';
 import 'package:trashtagApp/src/screens/items_collected/success_message.dart';
+import 'package:trashtagApp/src/screens/items_collected/trashtag_location.dart';
 import 'package:trashtagApp/src/widgets/green_button.dart';
 import 'package:trashtagApp/src/widgets/link_button.dart';
 import 'package:trashtagApp/src/widgets/loading_indicator.dart';
@@ -177,7 +177,7 @@ class ItemsCollectedPage extends StatelessWidget {
   }
 
   void _onSubmit(BuildContext context) async {
-    final location = Location();
+    final location = TrashTagLocation();
     final coordinate = await location.getCoordinate();
 
     BlocProvider.of<GarbageListBloc>(context).add(
