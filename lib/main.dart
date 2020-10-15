@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trashtagApp/src/bloc/home/home_bloc.dart';
-import 'package:trashtagApp/src/repository/user_repository.dart';
 
 import 'src/bloc/authentication/authentication_bloc.dart';
+import 'src/bloc/home/home_bloc.dart';
 import 'src/bloc/simple_delegate.dart';
 import 'src/repository/auth_repository.dart';
+import 'src/repository/user_repository.dart';
 import 'src/screens/home/home_page.dart';
 import 'src/screens/login/login_page.dart';
+import 'src/screens/policy/privacy_policy_page.dart';
 import 'src/screens/signup/independent_volunteer_page.dart';
 import 'src/screens/signup/organization_volunteer_page.dart';
 import 'src/screens/splash_screen/splash_screen.dart';
@@ -95,6 +96,9 @@ class TrashTagApp extends StatelessWidget {
     }
     if (state is SignUpAsOrganizationVolunteer) {
       return OrganizationVolunteerPage(authRepository: authRepository);
+    }
+    if (state is ViewTerms) {
+      return PrivacyPolicyPage();
     }
     return SplashScreen();
   }

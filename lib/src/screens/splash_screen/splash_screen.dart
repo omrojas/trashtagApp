@@ -20,13 +20,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _onSignUpAsIndependentVolunteer() {
     BlocProvider.of<AuthenticationBloc>(context).add(
-      SignUpAsIndependentVolunterrButtonPresed(),
+      SignUpAsIndependentVolunterrButtonPressed(),
     );
   }
 
   _onSignUpAsOrganizationVolunteer() {
     BlocProvider.of<AuthenticationBloc>(context).add(
-      SignUpAsOrganizationVolunterrButtonPresed(),
+      SignUpAsOrganizationVolunterrButtonPressed(),
     );
   }
 

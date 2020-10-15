@@ -43,7 +43,6 @@ class IndependentVolunteerPage extends StatelessWidget {
           _title(),
           SizedBox(height: 25.0),
           IdependentVolunteerForm(),
-          SizedBox(height: 40.0),
           _logIn(context),
           SizedBox(height: 40.0),
         ],
@@ -84,9 +83,10 @@ class IndependentVolunteerPage extends StatelessWidget {
     );
   }
 
-  _onLoginButtonPressed(BuildContext context) {
+  void _onLoginButtonPressed(BuildContext context) {
     BlocProvider.of<AuthenticationBloc>(context).add(
       AuthenticationLoggedOut(),
     );
   }
+
 }

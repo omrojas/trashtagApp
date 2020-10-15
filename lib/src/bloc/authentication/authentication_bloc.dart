@@ -27,11 +27,11 @@ class AuthenticationBloc
       yield Unauthentication();
     }
 
-    if (event is SignUpAsIndependentVolunterrButtonPresed) {
+    if (event is SignUpAsIndependentVolunterrButtonPressed) {
       yield SignUpAsIndependentVolunteer();
     }
 
-    if (event is SignUpAsOrganizationVolunterrButtonPresed) {
+    if (event is SignUpAsOrganizationVolunterrButtonPressed) {
       yield SignUpAsOrganizationVolunteer();
     }
 
@@ -58,6 +58,10 @@ class AuthenticationBloc
       yield AuthenticationInProgress();
       await authRepository.deleteToken();
       yield AuthenticationInitial();
+    }
+
+    if (event is TermsButtonPressed) {
+      yield ViewTerms();
     }
   }
 

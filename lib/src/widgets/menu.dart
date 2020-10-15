@@ -58,7 +58,7 @@ class Menu extends StatelessWidget {
       context: context,
       name: 'Home',
       assetName: 'assets/images/home.png',
-      onPresed: () {
+      onPressed: () {
         _onHomeButtonPressed(context);
       },
     );
@@ -69,7 +69,7 @@ class Menu extends StatelessWidget {
       context: context,
       name: 'Collect',
       assetName: 'assets/images/collect.png',
-      onPresed: () {
+      onPressed: () {
         _onCollectButtonPressed(context);
       },
     );
@@ -80,7 +80,7 @@ class Menu extends StatelessWidget {
       context: context,
       name: 'Submit',
       assetName: 'assets/images/my-list.png',
-      onPresed: () {
+      onPressed: () {
         _onListButtonPressed(context);
       },
     );
@@ -90,7 +90,7 @@ class Menu extends StatelessWidget {
     @required BuildContext context,
     @required String name,
     @required String assetName,
-    @required Function onPresed,
+    @required Function onPressed,
   }) {
     return _buttonContainer(
       child: FlatButton(
@@ -101,7 +101,7 @@ class Menu extends StatelessWidget {
             _buttonText(context: context, text: name),
           ],
         ),
-        onPressed: onPresed,
+        onPressed: onPressed,
       ),
     );
   }

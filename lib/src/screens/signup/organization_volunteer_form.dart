@@ -5,6 +5,7 @@ import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart'
 import 'package:trashtagApp/src/bloc/signup/organizer/organizer_signup_bloc.dart';
 import 'package:trashtagApp/src/models/organization.dart';
 import 'package:trashtagApp/src/models/user.dart';
+import 'package:trashtagApp/src/screens/policy/terms_conditions_link.dart';
 import 'package:trashtagApp/src/stream_controllers/signup/organization/organization_volunteer.signup_controller.dart';
 import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
@@ -24,7 +25,7 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
     setState(() => _passwordVisible = !_passwordVisible);
   }
 
-  void _onSignUpButtonPresed() {
+  void _onSignUpButtonPressed() {
     final user = User(
       firstName: _streamController.firstName,
       lastName: _streamController.lastName,
@@ -134,6 +135,7 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
         _form(state),
         SizedBox(height: 10),
         _message(),
+        TermsAndConditionsLink(),
       ],
     );
   }
@@ -272,7 +274,7 @@ class _OrganizationVolunteerFormState extends State<OrganizationVolunteerForm> {
       text: 'CREATE YOUR ACCOUNT',
       stream: _streamController.validFormStream,
       function:
-          state is! OrganizerSignUpInProgress ? _onSignUpButtonPresed : null,
+          state is! OrganizerSignUpInProgress ? _onSignUpButtonPressed : null,
     );
   }
 

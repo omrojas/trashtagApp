@@ -27,7 +27,7 @@ class TrashTagDrawer extends StatelessWidget {
               context: context,
               text: 'Log out',
               icon: Icons.exit_to_app,
-              onPresed: () => _onLogOut(context),
+              onPressed: () => _onLogOut(context),
             ),
           ],
         ),
@@ -39,7 +39,7 @@ class TrashTagDrawer extends StatelessWidget {
     @required BuildContext context,
     @required final String text,
     @required final IconData icon,
-    @required final Function onPresed,
+    @required final Function onPressed,
   }) {
     return ListTile(
       leading: Icon(
@@ -52,7 +52,7 @@ class TrashTagDrawer extends StatelessWidget {
       ),
       onTap: () {
         Navigator.of(context).pop();
-        onPresed();
+        onPressed();
       },
     );
   }

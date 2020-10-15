@@ -59,7 +59,6 @@ class OrganizationVolunteerPage extends StatelessWidget {
           _title(),
           SizedBox(height: 25.0),
           OrganizationVolunteerForm(),
-          SizedBox(height: 40.0),
           _logIn(context),
           SizedBox(height: 40.0),
         ],

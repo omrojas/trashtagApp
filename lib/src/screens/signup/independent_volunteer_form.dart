@@ -4,6 +4,7 @@ import 'package:trashtagApp/src/bloc/authentication/authentication_bloc.dart'
     as authentication_bloc;
 import 'package:trashtagApp/src/bloc/signup/independent/independent_signup_bloc.dart';
 import 'package:trashtagApp/src/models/user.dart';
+import 'package:trashtagApp/src/screens/policy/terms_conditions_link.dart';
 import 'package:trashtagApp/src/stream_controllers/signup/signup_controller.dart';
 import 'package:trashtagApp/src/widgets/trashtag_button.dart';
 
@@ -23,7 +24,7 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
     setState(() => _passwordVisible = !_passwordVisible);
   }
 
-  void _onSignUpButtonPresed() {
+  void _onSignUpButtonPressed() {
     final user = User(
       firstName: _streamController.firstName,
       lastName: _streamController.lastName,
@@ -98,6 +99,7 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
         _form(state),
         SizedBox(height: 10),
         _message(),
+        TermsAndConditionsLink(),
         _progressIndicator(state)
       ],
     );
@@ -193,12 +195,12 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
       text: 'CREATE YOUR ACCOUNT',
       stream: _streamController.validFormStream,
       function:
-          state is! IndependentSignUpInProgress ? _onSignUpButtonPresed : null,
+          state is! IndependentSignUpInProgress ? _onSignUpButtonPressed : null,
     );
   }
 
   Widget _message() {
-    return Text('By creating an account, you agree to our Terms.');
+    return Text('By creating an account, you agree to our:');
   }
 
   Widget _progressIndicator(IndependentSignUpState state) {
@@ -209,4 +211,5 @@ class _IdependentVolunteerFormState extends State<IdependentVolunteerForm> {
           : null,
     );
   }
+
 }

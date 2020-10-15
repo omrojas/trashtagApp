@@ -22,7 +22,6 @@ Future<void> writeFile({
   }
 }
 
-// TODO Test for iOS
 Future<String> get getDownloadPath async {
   try {
     final directory = await DownloadsPathProvider.downloadsDirectory;
@@ -32,7 +31,6 @@ Future<String> get getDownloadPath async {
   }
 }
 
-// TODO Test for iOS
 Future<bool> get requestPermissions async {
   try {
     final bool granted = await Permission.storage.isGranted;

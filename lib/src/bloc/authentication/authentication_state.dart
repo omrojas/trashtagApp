@@ -18,3 +18,5 @@ class Unauthentication extends AuthenticationState {}
 class SignUpAsIndependentVolunteer extends AuthenticationState {}
 
 class SignUpAsOrganizationVolunteer extends AuthenticationState {}
+
+class ViewTerms extends AuthenticationState {}

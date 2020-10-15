@@ -25,6 +25,8 @@ class AuthenticationLoggedOut extends AuthenticationEvent {}
 
 class LoginButtonPressed extends AuthenticationEvent {}
 
-class SignUpAsIndependentVolunterrButtonPresed extends AuthenticationEvent {}
+class SignUpAsIndependentVolunterrButtonPressed extends AuthenticationEvent {}
 
-class SignUpAsOrganizationVolunterrButtonPresed extends AuthenticationEvent {}
+class SignUpAsOrganizationVolunterrButtonPressed extends AuthenticationEvent {}
+
+class TermsButtonPressed extends AuthenticationEvent {}
